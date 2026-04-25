@@ -24,10 +24,6 @@
   column-gap: calc(1rem);
 }
 
-.gap-8 {
-  gap: calc(var(--spacing) * 8);
-}
-
 body {
   margin: 0;
   min-height: 100vh;
