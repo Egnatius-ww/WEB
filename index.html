@@ -4,6 +4,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>BuildMart</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="styles/main.css" />
     <link rel="stylesheet" href="styles/header.css" />
   </head>
@@ -11,7 +17,7 @@
     <main class="screen">
       <header class="header">
         <div class="header__container flex items-center justify-between">
-          <div class="header__start flex items-center gap-8">
+          <div class="header__start flex items-center gap-4">
             <a class="header__link" href="#" aria-label="Header link">
               <span class="header__link-container">
                 <span class="header__link-text" aria-hidden="true">BM</span>
@@ -20,6 +26,9 @@
             </a>
             <nav class="header__navigation" aria-label="Primary navigation">
               <a class="header__navigation-link" href="#">Products</a>
+              <a class="header__navigation-link header__navigation-link--categories" href="#">Categories</a>
+              <a class="header__navigation-link header__navigation-link--deals" href="#">Deals</a>
+              <a class="header__navigation-link header__navigation-link--about" href="#">About</a>
             </nav>
           </div>
           <div class="header__end" aria-hidden="true"></div>
