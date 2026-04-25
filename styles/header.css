@@ -26,7 +26,7 @@
 }
 
 .header__link {
-  width: 139.89px;
+  width: fit-content;
   height: 40px;
   display: flex;
   align-items: center;
@@ -59,7 +59,7 @@
 }
 
 .header__link-label {
-  width: 93px;
+  width: auto;
   height: 28px;
   display: block;
   color: #101828;
@@ -76,14 +76,14 @@
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
-  width: 324.14px;
+  width: fit-content;
   height: 24px;
   gap: 32px;
   flex-shrink: 0;
 }
 
 .header__navigation-link {
-  width: 66px;
+  width: auto;
   height: 24px;
   display: block;
   position: relative;
