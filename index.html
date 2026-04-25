@@ -10,13 +10,19 @@
   <body>
     <main class="screen">
       <header class="header">
-        <div class="header__container">
-          <a class="header__link" href="#" aria-label="Header link">
-            <span class="header__link-container">
-              <span class="header__link-text" aria-hidden="true">BM</span>
-            </span>
-            <span class="header__link-label">BuildMart</span>
-          </a>
+        <div class="header__container flex items-center justify-between">
+          <div class="header__start flex items-center gap-8">
+            <a class="header__link" href="#" aria-label="Header link">
+              <span class="header__link-container">
+                <span class="header__link-text" aria-hidden="true">BM</span>
+              </span>
+              <span class="header__link-label">BuildMart</span>
+            </a>
+            <nav class="header__navigation" aria-label="Primary navigation">
+              <a class="header__navigation-link" href="#">Products</a>
+            </nav>
+          </div>
+          <div class="header__end" aria-hidden="true"></div>
         </div>
       </header>
     </main>
