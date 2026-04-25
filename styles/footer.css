@@ -1,0 +1,18 @@
+.footer {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 454px;
+  margin-top: auto;
+  padding: 48px 32px;
+  display: flex;
+  align-items: flex-end;
+  background: #101828;
+  color: #94a3b8;
+  font-family: Inter, system-ui, sans-serif;
+}
+
+.footer__copyright {
+  width: 100%;
+  margin: 0;
+  text-align: center;
+}
