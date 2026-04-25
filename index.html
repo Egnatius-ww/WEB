@@ -17,65 +17,61 @@
     <main class="screen">
       <header class="header">
         <div class="header__container flex items-center justify-between">
-          <div class="header__start flex items-center">
-            <a class="header__link" href="#" aria-label="Header link">
-              <span class="header__link-container">
-                <span class="header__link-text" aria-hidden="true">BM</span>
-              </span>
-              <span class="header__link-label">BuildMart</span>
-            </a>
-            <nav class="header__navigation" aria-label="Primary navigation">
-              <a class="header__navigation-link" href="#">Products</a>
-              <a class="header__navigation-link header__navigation-link--categories" href="#">Categories</a>
-              <a class="header__navigation-link header__navigation-link--deals" href="#">Deals</a>
-              <a class="header__navigation-link header__navigation-link--about" href="#">About</a>
-            </nav>
+          <a class="header__link" href="#" aria-label="Header link">
+            <span class="header__link-container">
+              <span class="header__link-text" aria-hidden="true">BM</span>
+            </span>
+            <span class="header__link-label">BuildMart</span>
+          </a>
+          <nav class="header__navigation" aria-label="Primary navigation">
+            <a class="header__navigation-link" href="#">Products</a>
+            <a class="header__navigation-link header__navigation-link--categories" href="#">Categories</a>
+            <a class="header__navigation-link header__navigation-link--deals" href="#">Deals</a>
+            <a class="header__navigation-link header__navigation-link--about" href="#">About</a>
+          </nav>
+          <div class="header__search-field">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="header__search-icon"
+              aria-hidden="true"
+            >
+              <circle cx="11" cy="11" r="8"></circle>
+              <path d="m21 21-4.3-4.3"></path>
+            </svg>
+            <input
+              class="header__search-input"
+              type="text"
+              placeholder="Search products..."
+            />
           </div>
-          <div class="header__end">
-            <div class="header__search-field">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="header__search-icon"
-                aria-hidden="true"
-              >
-                <circle cx="11" cy="11" r="8"></circle>
-                <path d="m21 21-4.3-4.3"></path>
-              </svg>
-              <input
-                class="header__search-input"
-                type="text"
-                placeholder="Search products..."
-              />
-            </div>
-            <a class="header__action-link" href="/cart" aria-label="Open cart">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="header__cart-icon w-5 h-5"
-              >
-                <circle cx="8" cy="21" r="1"></circle>
-                <circle cx="19" cy="21" r="1"></circle>
-                <path
-                  d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"
-                ></path>
-              </svg>
-            </a>
-          </div>
+          <a class="header__action-link" href="/cart" aria-label="Open cart">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="header__cart-icon w-5 h-5"
+            >
+              <circle cx="8" cy="21" r="1"></circle>
+              <circle cx="19" cy="21" r="1"></circle>
+              <path
+                d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"
+              ></path>
+            </svg>
+          </a>
         </div>
       </header>
     </main>
