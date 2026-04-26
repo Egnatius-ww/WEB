@@ -20,8 +20,10 @@
   box-sizing: border-box;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 20px;
+  /* <768px — flex + gap; от 768px — grid с равным column-gap в медиазапросе ниже */
+  justify-content: flex-start;
+  gap: 16px;
+  min-width: 0;
 }
 
 @media (min-width: 640px) {
@@ -118,7 +120,8 @@
 }
 
 .header__link {
-  width: 139.89px;
+  width: auto;
+  min-width: 0;
   height: 40px;
   display: flex;
   align-items: center;
@@ -169,9 +172,9 @@
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
-  width: 324.14px;
+  width: auto;
   height: 24px;
-  gap: 32px;
+  gap: 20px;
   flex-shrink: 0;
 }
 
@@ -206,4 +209,264 @@
 
 .header__navigation-link--about {
   width: 45px;
+}
+
+/* —— Mobile / tablet / desktop (375px … 1440px+) —— */
+.header__toolbar-end {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.header__icon-btn {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: none;
+  border-radius: 10px;
+  background: transparent;
+  color: #4b5563;
+  cursor: pointer;
+  box-sizing: border-box;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.header__icon-btn:hover {
+  background: #f9fafb;
+  color: #ff5a00;
+}
+
+.header__icon-btn-svg {
+  display: block;
+  width: 24px;
+  height: 24px;
+}
+
+/* Декоративная «лупа» в мобильной строке: не кнопка, без hover/tap */
+.header__search-decoy {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  margin: 0;
+  padding: 0;
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  color: #4b5563;
+  box-sizing: border-box;
+}
+
+.header__search-decoy-svg {
+  display: block;
+  width: 24px;
+  height: 24px;
+}
+
+.header__icon-btn.header__menu-toggle {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.header__icon-btn.header__menu-toggle:hover,
+.header__icon-btn.header__menu-toggle:active {
+  background-color: transparent !important;
+  color: #4b5563;
+}
+
+.header__icon-btn.header__menu-toggle:focus {
+  outline: none;
+}
+
+.header__icon-btn.header__menu-toggle:focus-visible {
+  outline: 2px solid #ff5a00;
+  outline-offset: 2px;
+}
+
+.header__mobile-panel {
+  display: none;
+  width: 100%;
+  max-width: 1280px;
+  margin-inline: auto;
+  box-sizing: border-box;
+  padding: 0 16px;
+  border-bottom: 1px solid transparent;
+  background: #ffffff;
+}
+
+/* Разделитель между строкой хедера и полем поиска (отдельно от поля) */
+.header__mobile-panel::before {
+  content: "";
+  display: block;
+  height: 1px;
+  width: calc(100% + 32px);
+  margin: 0 -16px 12px;
+  background-color: var(--line, #e4e7ec);
+  box-sizing: border-box;
+}
+
+.header__search-field--panel {
+  width: 100%;
+  max-width: none;
+  height: 48px;
+  margin: 0 0 12px;
+  box-sizing: border-box;
+}
+
+.header__navigation--panel {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  width: 100%;
+  height: auto;
+  gap: 18px;
+  margin: 0;
+  padding: 8px 0 4px;
+}
+
+.header__navigation--panel .header__navigation-link {
+  width: 100%;
+  padding: 8px 0;
+  border-bottom: none;
+  font-size: 17px;
+  box-sizing: border-box;
+}
+
+.header__navigation--panel .header__navigation-link--categories,
+.header__navigation--panel .header__navigation-link--deals,
+.header__navigation--panel .header__navigation-link--about {
+  width: 100%;
+}
+
+/* Mobile: < 768px — sheet in document flow (pushes main); search + links in panel */
+@media (max-width: 767px) {
+  .header {
+    height: auto;
+    min-height: 72px;
+  }
+
+  .header__container {
+    height: 71px;
+    min-height: 71px;
+    gap: 12px;
+  }
+
+  /* Логотип слева, лупа + корзина + меню справа (nav/search скрыты из потока) */
+  .header__toolbar-end {
+    margin-left: auto;
+  }
+
+  .header__link-label {
+    display: none;
+  }
+
+  .header__link {
+    width: auto;
+    min-width: 0;
+  }
+
+  .header__container > .header__navigation {
+    display: none;
+  }
+
+  .header__container > .header__search-field {
+    display: none;
+  }
+
+  .header__mobile-panel {
+    display: none;
+  }
+
+  .header.header--nav-open .header__mobile-panel {
+    display: block;
+    max-height: min(420px, calc(100dvh - 72px - 12px));
+    overflow: auto;
+    padding-bottom: 16px;
+    border-bottom-color: var(--line, #e4e7ec);
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .header__icon-btn {
+    display: inline-flex;
+  }
+
+  .header__search-decoy {
+    display: inline-flex;
+  }
+
+  .header__menu-toggle {
+    display: inline-flex;
+  }
+}
+
+/* Tablet+ (768px …): 4 колонки — логотип | nav | поиск | тулбар;
+   равный column-gap не схлопывается на узкой ширине (в отличие от space-between) */
+@media (min-width: 768px) {
+  .header__container {
+    display: grid;
+    grid-template-columns: auto auto minmax(0, 1fr) auto;
+    column-gap: clamp(14px, 2.4vw, 24px);
+    row-gap: 0;
+    align-items: center;
+    justify-content: normal;
+  }
+
+  .header__search-decoy,
+  .header__menu-toggle {
+    display: none;
+  }
+
+  .header__search-field {
+    position: relative;
+    top: auto;
+    left: auto;
+    right: auto;
+    width: 100%;
+    height: 42px;
+    max-height: none;
+    opacity: 1;
+    overflow: visible;
+    pointer-events: auto;
+    transform: none;
+    justify-self: start;
+    min-width: 0;
+    max-width: min(448px, 100%);
+    box-sizing: border-box;
+  }
+}
+
+/* Только ≥1440px: средняя дорожка по ширине поля (max-content), не 1fr — синий контейнер поиска не растягивается;
+   свободное место уходит в space-between между четырьмя колонками вместе с column-gap */
+@media (min-width: 1440px) {
+  .header__container {
+    grid-template-columns: auto auto max-content auto;
+    justify-content: space-between;
+  }
+
+  .header__search-field {
+    width: 448px;
+    max-width: 100%;
+    justify-self: auto;
+  }
+}
+
+/* Планшет 768–1023px: только значок BM, без текста BuildMart */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .header__link-label {
+    display: none;
+  }
+}
+
+@media (min-width: 1024px) {
+  .header__link-label {
+    display: block;
+  }
 }

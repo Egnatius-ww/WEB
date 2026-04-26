@@ -3,6 +3,7 @@ const catalog = document.querySelector(".catalog");
 const buttonText = filtersToggle?.querySelector(".catalog__button-text");
 const ratingCheckboxes = document.querySelectorAll(".catalog__rating-checkbox");
 const productCards = document.querySelectorAll(".catalog__product-container");
+const productsGrid = document.getElementById("catalog-products-grid");
 const productsCounter = document.querySelector(".catalog__inline-paragraph");
 const priceMinInput = document.getElementById("catalog-price-min");
 const priceMaxInput = document.getElementById("catalog-price-max");
@@ -16,36 +17,6 @@ const getPriceSliderMax = () => {
   const raw = priceMaxInput?.getAttribute("max") ?? priceMinInput?.getAttribute("max") ?? "400";
   const n = Number.parseFloat(raw);
   return Number.isFinite(n) && n > 0 ? n : 400;
-};
-
-/** Matches absolute offsets in styles/catalog.css */
-const CATALOG_LAYOUT = {
-  gridTopClosed: 202,
-  gridTopOpen: 367,
-  rowGap: 620.34,
-  cardHeight: 596.34,
-  bottomPad: 32,
-};
-
-const updateCatalogHeight = () => {
-  if (!catalog) return;
-
-  const gridTop = catalog.classList.contains("catalog--filters-open")
-    ? CATALOG_LAYOUT.gridTopOpen
-    : CATALOG_LAYOUT.gridTopClosed;
-
-  const visibleCount = [...productCards].filter((card) => card.style.display !== "none").length;
-
-  if (visibleCount === 0) {
-    catalog.style.height = `${gridTop + CATALOG_LAYOUT.bottomPad}px`;
-    return;
-  }
-
-  const rows = Math.ceil(visibleCount / 3);
-  const gridBottom =
-    gridTop + (rows - 1) * CATALOG_LAYOUT.rowGap + CATALOG_LAYOUT.cardHeight + CATALOG_LAYOUT.bottomPad;
-
-  catalog.style.height = `${gridBottom}px`;
 };
 
 const getCardRating = (card) => {
@@ -123,16 +94,17 @@ const syncPriceInputs = () => {
   updatePriceRangeFill();
 };
 
-const positionVisibleCards = (visibleCards) => {
-  const columnOffsets = [0, 413.33, 826.66];
-  const rowOffset = 620.34;
-
-  visibleCards.forEach((card, index) => {
-    const column = index % 3;
-    const row = Math.floor(index / 3);
-
-    card.style.left = `${columnOffsets[column]}px`;
-    card.style.top = `${row * rowOffset}px`;
+const reorderProductCardsInGrid = (visibleSorted, hidden) => {
+  if (!productsGrid) return;
+  visibleSorted.forEach((card) => {
+    card.style.left = "";
+    card.style.top = "";
+    productsGrid.appendChild(card);
+  });
+  hidden.forEach((card) => {
+    card.style.left = "";
+    card.style.top = "";
+    productsGrid.appendChild(card);
   });
 };
 
@@ -160,13 +132,12 @@ const applyFilters = () => {
   const sortMode = sortSelect?.value || "name-asc";
   visibleCards.sort((a, b) => compareCardsForSort(a, b, sortMode));
 
-  positionVisibleCards(visibleCards);
+  const hiddenCards = [...productCards].filter((c) => c.style.display === "none");
+  reorderProductCardsInGrid(visibleCards, hiddenCards);
 
   if (productsCounter) {
     productsCounter.textContent = `Showing ${visibleCount} products`;
   }
-
-  updateCatalogHeight();
 };
 
 if (filtersToggle && catalog) {
@@ -177,8 +148,6 @@ if (filtersToggle && catalog) {
     if (buttonText) {
       buttonText.textContent = isOpen ? "Hide Filters" : "Show Filters";
     }
-
-    updateCatalogHeight();
   });
 }
 
@@ -193,18 +162,15 @@ const setRatingCheckboxVisual = (item, checked) => {
 
 ratingCheckboxes.forEach((checkbox) => {
   checkbox.addEventListener("click", () => {
-    const minimumRating = Number.parseInt(checkbox.id.replace("rating-", ""), 10);
     const wasChecked = checkbox.getAttribute("aria-checked") === "true";
 
     if (wasChecked) {
       ratingCheckboxes.forEach((item) => setRatingCheckboxVisual(item, false));
-      applyFilters();
-      return;
+    } else {
+      ratingCheckboxes.forEach((item) => {
+        setRatingCheckboxVisual(item, item === checkbox);
+      });
     }
-
-    ratingCheckboxes.forEach((item) => {
-      setRatingCheckboxVisual(item, item === checkbox);
-    });
 
     applyFilters();
   });

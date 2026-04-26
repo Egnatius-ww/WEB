@@ -30,23 +30,25 @@
               </p>
             </div>
           </div>
-          <div class="catalog__container-secondary" aria-label="Container">
-            <div class="catalog__container-horizontal" aria-label="Container">
-              <button class="catalog__button" type="button" id="catalog-filters-toggle" aria-expanded="false" aria-controls="catalog-filters-panel">
-                <svg class="catalog__button-icon" width="24" height="24" aria-hidden="true"><use href="../assets/icons.svg#sym-filter"></use></svg>
-                <span class="catalog__button-text">Show Filters</span>
-              </button>
-              <p class="catalog__inline-paragraph text-gray-600">Showing 6 products</p>
+          <div class="catalog__toolbar">
+            <div class="catalog__container-secondary" aria-label="Container">
+              <div class="catalog__container-horizontal" aria-label="Container">
+                <button class="catalog__button" type="button" id="catalog-filters-toggle" aria-expanded="false" aria-controls="catalog-filters-panel">
+                  <svg class="catalog__button-icon" width="24" height="24" aria-hidden="true"><use href="../assets/icons.svg#sym-filter"></use></svg>
+                  <span class="catalog__button-text">Show Filters</span>
+                </button>
+                <p class="catalog__inline-paragraph text-gray-600">Showing 6 products</p>
+              </div>
             </div>
-          </div>
-          <div class="catalog__container-tertiary" aria-label="Sort products">
-            <div class="catalog__sort">
-              <label class="catalog__sort-label" for="catalog-sort">Sort by:</label>
-              <select id="catalog-sort" class="catalog__dropdown" aria-label="Sort products">
-                <option value="name-asc">Name (A-Z)</option>
-                <option value="price-asc">Price (Low to High)</option>
-                <option value="price-desc">Price (High to Low)</option>
-              </select>
+            <div class="catalog__container-tertiary" aria-label="Sort products">
+              <div class="catalog__sort">
+                <label class="catalog__sort-label" for="catalog-sort">Sort by:</label>
+                <select id="catalog-sort" class="catalog__dropdown" aria-label="Sort products">
+                  <option value="name-asc">Name (A-Z)</option>
+                  <option value="price-asc">Price (Low to High)</option>
+                  <option value="price-desc">Price (High to Low)</option>
+                </select>
+              </div>
             </div>
           </div>
           <div class="catalog__filters-panel" id="catalog-filters-panel" aria-label="Filters container">
@@ -126,6 +128,7 @@
             </div>
           </div>
           <div class="catalog__container-quaternary" aria-label="Container">
+            <div class="catalog__products-grid" id="catalog-products-grid">
             <div class="catalog__product-container" aria-label="Container">
               <a class="catalog__product-link group" href="/html/card.html?id=exterior-paint" aria-label="Product">
                 <img
@@ -293,6 +296,7 @@
                 <svg class="catalog__product-button-icon" width="24" height="24" aria-hidden="true"><use href="../assets/icons.svg#sym-cart"></use></svg>
                 <span class="catalog__product-button-text">Add to Cart</span>
               </button>
+            </div>
             </div>
           </div>
         </section>
