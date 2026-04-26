@@ -119,19 +119,19 @@
               <p class="catalog__inline-paragraph text-gray-600">Showing 6 products</p>
             </div>
           </div>
-          <div class="catalog__container-tertiary" aria-label="Container">
-            <div class="catalog__label" aria-label="Label">
-              <p class="catalog__label-text">Sort by:</p>
+          <div class="catalog__container-tertiary" aria-label="Sort products">
+            <div class="catalog__sort">
+              <label class="catalog__sort-label" for="catalog-sort">Sort by:</label>
+              <select id="catalog-sort" class="catalog__dropdown" aria-label="Sort products">
+                <option value="name-asc">Name (A-Z)</option>
+                <option value="price-asc">Price (Low to High)</option>
+                <option value="price-desc">Price (High to Low)</option>
+              </select>
             </div>
-            <select class="catalog__dropdown" aria-label="Sort products">
-              <option value="name-asc">Name (A-Z)</option>
-              <option value="price-asc">Price (Low to High)</option>
-              <option value="price-desc">Price (High to Low)</option>
-            </select>
           </div>
           <div class="catalog__filters-panel" id="catalog-filters-panel" aria-label="Filters container">
             <div class="catalog__filters-row" aria-label="Container">
-              <div class="catalog__filters-column" aria-label="Container">
+              <div class="catalog__filters-column catalog__filters-column--rating" aria-label="Container">
                 <h3 class="catalog__filters-heading">
                   <span class="catalog__filters-heading-text">Minimum Rating</span>
                 </h3>
@@ -169,6 +169,45 @@
                     </div>
                   </div>
                 </div>
+              </div>
+              <div class="catalog__filters-column catalog__filters-column--price" aria-label="Price range">
+                <h3 class="catalog__filters-heading catalog__filters-heading--price">
+                  <span class="catalog__filters-heading-text catalog__filters-heading-text--price">Price Range</span>
+                </h3>
+                <div class="catalog__price-range">
+                  <div class="catalog__price-range-sliders">
+                    <div class="catalog__price-range-track" aria-hidden="true">
+                      <div class="catalog__price-range-fill" id="catalog-price-range-fill"></div>
+                    </div>
+                    <input
+                      type="range"
+                      id="catalog-price-min"
+                      class="catalog__price-range-input catalog__price-range-input--min"
+                      min="0"
+                      max="400"
+                      value="0"
+                      step="1"
+                      aria-label="Minimum price"
+                    />
+                    <input
+                      type="range"
+                      id="catalog-price-max"
+                      class="catalog__price-range-input catalog__price-range-input--max"
+                      min="0"
+                      max="400"
+                      value="400"
+                      step="1"
+                      aria-label="Maximum price"
+                    />
+                  </div>
+                  <div class="catalog__price-range-labels">
+                    <span class="catalog__price-range-label" id="catalog-price-label-min">$0</span>
+                    <span class="catalog__price-range-label" id="catalog-price-label-max">$400</span>
+                  </div>
+                </div>
+              </div>
+              <div class="catalog__filters-clear-wrap">
+                <button type="button" class="catalog__filters-clear" id="catalog-clear-filters">Clear All Filters</button>
               </div>
             </div>
           </div>
