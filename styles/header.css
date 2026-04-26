@@ -80,6 +80,31 @@
   flex-shrink: 0;
 }
 
+.header__cart-badge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  box-sizing: border-box;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 4px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  background-color: #ea580c;
+  color: #ffffff;
+  font-family: Inter, Arial, sans-serif;
+  font-size: 0.75rem;
+  line-height: 1rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.header__cart-badge[hidden] {
+  display: none !important;
+}
+
 .header__action-link:hover {
   color: #ff5a00;
 }
