@@ -1,0 +1,7 @@
+# Legacy product URLs → static card (Netlify, Cloudflare Pages)
+/product/1  /card.html?id=premium-cement-bags   302
+/product/2  /card.html?id=premium-lumber-planks 302
+/product/3  /card.html?id=red-clay-bricks       302
+/product/4  /card.html?id=steel-i-beams         302
+/product/5  /card.html?id=exterior-paint        302
+/product/6  /card.html?id=plywood-sheets        302

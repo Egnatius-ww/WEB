@@ -1,0 +1,10 @@
+# Apache: legacy /product/N → card.html (enable mod_rewrite)
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteRule ^product/1$  card.html?id=premium-cement-bags   [R=302,L,QSA]
+  RewriteRule ^product/2$  card.html?id=premium-lumber-planks  [R=302,L,QSA]
+  RewriteRule ^product/3$  card.html?id=red-clay-bricks       [R=302,L,QSA]
+  RewriteRule ^product/4$  card.html?id=steel-i-beams         [R=302,L,QSA]
+  RewriteRule ^product/5$  card.html?id=exterior-paint        [R=302,L,QSA]
+  RewriteRule ^product/6$  card.html?id=plywood-sheets        [R=302,L,QSA]
+</IfModule>
