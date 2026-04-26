@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <script>
+      (function () {
+        function documentDirectoryHref() {
+          var u = new URL(location.href);
+          u.hash = "";
+          u.search = "";
+          var path = u.pathname;
+          path = path.replace(/\/[^/]+\/?$/, "/");
+          if (!path) path = "/";
+          u.pathname = path;
+          return u.href;
+        }
+        var b = document.createElement("base");
+        b.href = documentDirectoryHref();
+        var meta = document.head.querySelector("meta[charset]");
+        document.head.insertBefore(b, meta ? meta.nextSibling : document.head.firstChild);
+      })();
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cart - BuildMart</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../styles/main.css" />
+    <link rel="stylesheet" href="../styles/header.css" />
+    <link rel="stylesheet" href="../styles/footer.css" />
+    <link rel="stylesheet" href="../styles/cart.css" />
+  </head>
+  <body>
+    <main class="screen">
+      <div id="site-header-mount"></div>
+      <div class="screen__content cart-page" id="cartPage">
+        <div class="cart-page__main-content" aria-label="Main Content">
+          <div class="cart-page__empty-state">
+            <h1 class="cart-page__empty-title">Your Cart is Empty</h1>
+            <p class="cart-page__empty-paragraph">Start shopping to add items to your cart</p>
+            <a class="cart-page__browse-link" href="catalog.html">
+              <span class="cart-page__browse-link-text">Browse Products</span>
+              <span class="cart-page__browse-link-icon" aria-hidden="true">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M5 12h14"></path>
+                  <path d="m12 5 7 7-7 7"></path>
+                </svg>
+              </span>
+            </a>
+          </div>
+
+          <div class="cart-page__filled-state" hidden>
+            <div class="cart-page__filled-layout">
+              <div class="cart-page__filled-items">
+                <h1 class="cart-page__filled-title">Shopping Cart</h1>
+                <div class="cart-page__items" role="list">
+                  <article class="cart-page__item" role="listitem">
+                    <div class="cart-page__product">
+                      <img
+                        class="cart-page__product-image"
+                        src="https://images.unsplash.com/photo-1704167674713-649193461719?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080"
+                        alt="Plywood Sheets"
+                        width="84"
+                        height="84"
+                      />
+                      <div class="cart-page__product-info">
+                        <p class="cart-page__product-title">Plywood Sheets</p>
+                        <p class="cart-page__product-meta">Wood &amp; Lumber</p>
+                        <a class="cart-page__product-link" href="card.html?id=plywood-sheets">View product</a>
+                      </div>
+                    </div>
+                    <p class="cart-page__price">$52.99</p>
+                    <div class="cart-page__qty">
+                      <button class="cart-page__qty-btn" type="button" aria-label="Decrease quantity">-</button>
+                      <input class="cart-page__qty-input" type="number" min="1" value="2" aria-label="Quantity" />
+                      <button class="cart-page__qty-btn" type="button" aria-label="Increase quantity">+</button>
+                    </div>
+                    <p class="cart-page__total">$105.98</p>
+                  </article>
+                  <article class="cart-page__item" role="listitem">
+                    <div class="cart-page__product">
+                      <img
+                        class="cart-page__product-image"
+                        src="https://images.unsplash.com/photo-1764025390519-1ccc15d719a8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080"
+                        alt="Premium Lumber Planks"
+                        width="84"
+                        height="84"
+                      />
+                      <div class="cart-page__product-info">
+                        <p class="cart-page__product-title">Premium Lumber Planks</p>
+                        <p class="cart-page__product-meta">Wood &amp; Lumber</p>
+                        <a class="cart-page__product-link" href="card.html?id=premium-lumber-planks">View product</a>
+                      </div>
+                    </div>
+                    <p class="cart-page__price">$89.99</p>
+                    <div class="cart-page__qty">
+                      <button class="cart-page__qty-btn" type="button" aria-label="Decrease quantity">-</button>
+                      <input class="cart-page__qty-input" type="number" min="1" value="1" aria-label="Quantity" />
+                      <button class="cart-page__qty-btn" type="button" aria-label="Increase quantity">+</button>
+                    </div>
+                    <p class="cart-page__total">$89.99</p>
+                  </article>
+                </div>
+              </div>
+
+              <aside class="cart-page__order-summary" aria-label="Order summary">
+                <h2 class="cart-page__order-summary-title">Order summary</h2>
+                <div class="cart-page__order-summary-body">
+                  <div class="cart-page__order-row">
+                    <span>Subtotal</span>
+                    <strong>$195.97</strong>
+                  </div>
+                  <div class="cart-page__order-row">
+                    <span>Shipping</span>
+                    <strong>$20.00</strong>
+                  </div>
+                  <div class="cart-page__order-row">
+                    <span>Estimated tax</span>
+                    <strong>$12.00</strong>
+                  </div>
+                  <div class="cart-page__order-divider"></div>
+                  <div class="cart-page__order-row cart-page__order-row--grand">
+                    <span>Total</span>
+                    <strong>$227.97</strong>
+                  </div>
+                </div>
+                <button class="cart-page__order-checkout" type="button">Proceed to checkout</button>
+                <a class="cart-page__order-continue" href="catalog.html">Continue shopping</a>
+              </aside>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="site-footer-mount"></div>
+    </main>
+
+    <script src="../scripts/header.js"></script>
+    <script src="../scripts/footer.js"></script>
+    <script src="../scripts/cart-page.js"></script>
+  </body>
+</html>
