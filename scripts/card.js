@@ -250,8 +250,20 @@
     product = window.getBuildmartProductById(DEFAULT_ID) || window.BUILDMART_PRODUCTS[0];
   }
 
+  function initAddToCart(p) {
+    if (!p || !window.BuildmartCart) return;
+    var btn = document.querySelector(".card-page__btn--primary");
+    if (!btn) return;
+    btn.addEventListener("click", function () {
+      var inp = document.getElementById("card-qty");
+      var n = Math.max(1, parseInt(inp && inp.value, 10) || 1);
+      window.BuildmartCart.add(p.id, n);
+    });
+  }
+
   applyProduct(product);
   initGallery();
   initQty();
+  initAddToCart(product);
 })();
 
