@@ -3,21 +3,22 @@
   width: 100%;
   min-height: 454px;
   margin-top: auto;
+  background: #101828;
+  color: #94a3b8;
+  font-family: Inter, system-ui, sans-serif;
+}
+
+.footer__container {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 1440px;
+  margin-inline: auto;
   padding: 48px 16px;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   gap: 32px;
   align-items: stretch;
-  background: #101828;
-  color: #94a3b8;
-  font-family: Inter, system-ui, sans-serif;
-}
-
-.footer > * {
-  width: 100%;
-  max-width: 1440px;
-  margin-inline: auto;
 }
 
 .footer__top {
@@ -194,7 +195,7 @@
 }
 
 @media (min-width: 768px) {
-  .footer {
+  .footer__container {
     padding-inline: 32px;
   }
 
