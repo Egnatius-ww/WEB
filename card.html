@@ -2,12 +2,30 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <script>
+      (function () {
+        function documentDirectoryHref() {
+          var u = new URL(location.href);
+          u.hash = "";
+          u.search = "";
+          var path = u.pathname;
+          path = path.replace(/\/[^/]+\/?$/, "/");
+          if (!path) path = "/";
+          u.pathname = path;
+          return u.href;
+        }
+        var b = document.createElement("base");
+        b.href = documentDirectoryHref();
+        var meta = document.head.querySelector("meta[charset]");
+        document.head.insertBefore(b, meta ? meta.nextSibling : document.head.firstChild);
+      })();
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>BuildMart</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800;900&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="styles/main.css" />
@@ -81,7 +99,7 @@
       <div class="screen__content card-page">
         <div class="card-page__container">
           <nav class="card-page__breadcrumb" aria-label="Breadcrumb">
-            <a class="card-page__breadcrumb-link" href="#">Products</a>
+            <a class="card-page__breadcrumb-link" href="catalog.html">Catalog</a>
             <span class="card-page__breadcrumb-separator" aria-hidden="true">/</span>
             <span class="card-page__breadcrumb-current">Exterior Paint Set</span>
           </nav>
@@ -189,7 +207,7 @@
                 </p>
               </div>
               <div class="card-page__accordion-wrap">
-                <details class="card-page__accordion" open>
+                <details class="card-page__accordion">
                   <summary class="card-page__accordion-summary">
                     Technical Specifications
                     <svg class="card-page__accordion-chevron" width="16" height="16" aria-hidden="true"><use href="#sym-chevron-down"></use></svg>
@@ -221,6 +239,7 @@
       </div>
       <div id="site-footer-mount"></div>
     </main>
+    <script src="scripts/products.js"></script>
     <script src="scripts/header.js"></script>
     <script src="scripts/footer.js"></script>
     <script src="scripts/card.js"></script>

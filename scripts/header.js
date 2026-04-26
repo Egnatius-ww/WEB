@@ -5,14 +5,14 @@
   mount.outerHTML = `
 <header class="header">
   <div class="header__container flex items-center justify-between">
-    <a class="header__link" href="#" aria-label="Header link">
+    <a class="header__link" href="catalog.html" aria-label="BuildMart home">
       <span class="header__link-container">
         <span class="header__link-text" aria-hidden="true">BM</span>
       </span>
       <span class="header__link-label">BuildMart</span>
     </a>
     <nav class="header__navigation" aria-label="Primary navigation">
-      <a class="header__navigation-link" href="#">Products</a>
+      <a class="header__navigation-link" href="catalog.html">Products</a>
       <a class="header__navigation-link header__navigation-link--categories" href="#">Categories</a>
       <a class="header__navigation-link header__navigation-link--deals" href="#">Deals</a>
       <a class="header__navigation-link header__navigation-link--about" href="#">About</a>

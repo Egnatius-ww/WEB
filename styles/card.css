@@ -10,28 +10,36 @@
   width: 100%;
 }
 
-.card-page__container {
-  box-sizing: border-box;
-  width: 100%;
+
+.screen__content.card-page {
   max-width: 1280px;
-  min-height: 1015px;
   margin-inline: auto;
-  padding: 0 16px 32px;
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
+  padding-inline: 16px;
+  box-sizing: border-box;
 }
 
 @media (min-width: 640px) {
-  .card-page__container {
+  .screen__content.card-page {
     padding-inline: 24px;
   }
 }
 
 @media (min-width: 1024px) {
-  .card-page__container {
+  .screen__content.card-page {
     padding-inline: 32px;
   }
+}
+
+.card-page__container {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: none;
+  min-height: 1015px;
+  margin-inline: 0;
+  padding: 0 0 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
 }
 
 .card-page__breadcrumb {
@@ -68,7 +76,7 @@
   gap: 32px;
 }
 
-/* 584px wide; stacked height ≈ 584 + 16 + (584 − 24) / 3 ≈ 786.67px. */
+
 .card-page__left {
   --card-gallery-width: min(584px, 100%);
   display: flex;
@@ -172,7 +180,7 @@
   flex-direction: column;
 }
 
-/* text-3xl md:text-4xl font-bold text-gray-900 mb-3 */
+
 .card-page__title {
   margin: 0 0 0.75rem;
   box-sizing: border-box;
@@ -192,7 +200,7 @@
   }
 }
 
-/* mb-4 + flex items-center gap-0.5 + stars w-6 h-6 + ml-2 text-sm text-gray-600 */
+
 .card-page__rating-block {
   box-sizing: border-box;
   width: 100%;
@@ -230,7 +238,7 @@
   color: #4b5563;
 }
 
-/* flex items-baseline gap-1 mb-6; text-4xl font-bold text-gray-900 + text-lg text-gray-500; block ~584×40 */
+
 .card-page__price {
   box-sizing: border-box;
   width: 100%;
@@ -250,7 +258,7 @@
 .card-page__price-amount {
   font-size: 2.25rem;
   line-height: 40px;
-  font-weight: 700;
+  font-weight: 800;
   color: #111827;
 }
 
@@ -261,7 +269,7 @@
   color: #6b7280;
 }
 
-/* ~584×61: три колонки, иконка + блок с двумя параграфами; линия снизу */
+
 .card-page__features {
   box-sizing: border-box;
   width: 100%;
@@ -319,7 +327,7 @@
   color: #6b7280;
 }
 
-/* mb-6 + label block text-sm font-semibold mb-2 + controls flex items-center gap-3 */
+
 .card-page__quantity-block {
   box-sizing: border-box;
   width: 100%;
@@ -568,7 +576,6 @@
   width: 100%;
 }
 
-/* mt-16 + h2 text-2xl font-bold mb-6 + grid responsive gap-6 */
 .card-page__related-inner {
   margin-top: 4rem;
 }
@@ -598,4 +605,87 @@
   .card-page__related-grid {
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }
+}
+
+.card-page__related-card {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+  background: #fff;
+  text-decoration: none;
+  color: inherit;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.card-page__related-card:hover {
+  border-color: #d1d5db;
+  box-shadow: 0 10px 15px -3px rgb(17 24 39 / 0.08), 0 4px 6px -4px rgb(17 24 39 / 0.06);
+}
+
+.card-page__related-card-img {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 0;
+  background: #f3f4f6;
+}
+
+.card-page__related-card-body {
+  box-sizing: border-box;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.card-page__related-card-title {
+  margin: 0;
+  font-family: Inter, system-ui, sans-serif;
+  font-size: 1rem;
+  line-height: 1.35;
+  font-weight: 800;
+  color: #111827;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.card-page__related-card-rating-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 2px;
+}
+
+.card-page__related-card-star {
+  display: block;
+  flex-shrink: 0;
+}
+
+.card-page__related-card-star.card-page__rating-star--full,
+.card-page__related-card-star.card-page__rating-star--half {
+  color: #facc15;
+}
+
+.card-page__related-card-star.card-page__rating-star--empty {
+  color: #e5e7eb;
+}
+
+.card-page__related-card-rating-value {
+  margin-left: 0.5rem;
+  font-size: 0.875rem;
+  line-height: 1.25;
+  color: #4b5563;
+}
+
+.card-page__related-card-price {
+  margin: 0.5rem 0 0;
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+  font-weight: 1000;
+  color: #111827;
 }
