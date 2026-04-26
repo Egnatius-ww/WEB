@@ -39,3 +39,13 @@ body {
   background: #ffffff;
 }
 
+.screen__content {
+  display: flex;
+  flex-direction: column;
+  width: 1469px;
+  height: 936px;
+  margin-top: 81px;
+  margin-left: 94.5px;
+  box-sizing: border-box;
+}
+

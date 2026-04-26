@@ -3,6 +3,9 @@
   height: 81px;
   margin: 0;
   padding: 0;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
   border-bottom: 1px solid var(--line, #e4e7ec);
   background-color: #ffffff;
   box-sizing: border-box;
