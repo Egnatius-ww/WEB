@@ -1,0 +1,654 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BuildMart</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles/main.css" />
+    <link rel="stylesheet" href="styles/header.css" />
+    <link rel="stylesheet" href="styles/catalog.css" />
+    <link rel="stylesheet" href="styles/footer.css" />
+  </head>
+  <body>
+    <main class="screen">
+      <header class="header">
+        <div class="header__container flex items-center justify-between">
+          <a class="header__link" href="#" aria-label="Header link">
+            <span class="header__link-container">
+              <span class="header__link-text" aria-hidden="true">BM</span>
+            </span>
+            <span class="header__link-label">BuildMart</span>
+          </a>
+          <nav class="header__navigation" aria-label="Primary navigation">
+            <a class="header__navigation-link" href="#">Products</a>
+            <a class="header__navigation-link header__navigation-link--categories" href="#">Categories</a>
+            <a class="header__navigation-link header__navigation-link--deals" href="#">Deals</a>
+            <a class="header__navigation-link header__navigation-link--about" href="#">About</a>
+          </nav>
+          <div class="header__search-field">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="header__search-icon"
+              aria-hidden="true"
+            >
+              <circle cx="11" cy="11" r="8"></circle>
+              <path d="m21 21-4.3-4.3"></path>
+            </svg>
+            <input
+              class="header__search-input"
+              type="text"
+              placeholder="Search products..."
+            />
+          </div>
+          <a class="header__action-link" href="/cart" aria-label="Open cart">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="header__cart-icon w-5 h-5"
+            >
+              <circle cx="8" cy="21" r="1"></circle>
+              <circle cx="19" cy="21" r="1"></circle>
+              <path
+                d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"
+              ></path>
+            </svg>
+          </a>
+        </div>
+      </header>
+      <div class="screen__content">
+        <section class="catalog" aria-label="Main Content">
+          <div class="catalog__section" aria-label="Section">
+            <div class="catalog__container" aria-label="Container">
+              <h1 class="catalog__heading">
+                <span class="catalog__heading-text">Building Materials</span>
+              </h1>
+              <p class="catalog__paragraph">
+                <span class="catalog__paragraph-text">Premium construction supplies for all your projects</span>
+              </p>
+            </div>
+          </div>
+          <div class="catalog__container-secondary" aria-label="Container">
+            <div class="catalog__container-horizontal" aria-label="Container">
+              <button class="catalog__button" type="button" id="catalog-filters-toggle" aria-expanded="false" aria-controls="catalog-filters-panel">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="catalog__button-icon"
+                  aria-hidden="true"
+                >
+                  <line x1="21" x2="14" y1="4" y2="4"></line>
+                  <line x1="10" x2="3" y1="4" y2="4"></line>
+                  <line x1="21" x2="12" y1="12" y2="12"></line>
+                  <line x1="8" x2="3" y1="12" y2="12"></line>
+                  <line x1="21" x2="16" y1="20" y2="20"></line>
+                  <line x1="12" x2="3" y1="20" y2="20"></line>
+                  <line x1="14" x2="14" y1="2" y2="6"></line>
+                  <line x1="8" x2="8" y1="10" y2="14"></line>
+                  <line x1="16" x2="16" y1="18" y2="22"></line>
+                </svg>
+                <span class="catalog__button-text">Show Filters</span>
+              </button>
+              <p class="catalog__inline-paragraph text-gray-600">Showing 6 products</p>
+            </div>
+          </div>
+          <div class="catalog__container-tertiary" aria-label="Sort products">
+            <div class="catalog__sort">
+              <label class="catalog__sort-label" for="catalog-sort">Sort by:</label>
+              <select id="catalog-sort" class="catalog__dropdown" aria-label="Sort products">
+                <option value="name-asc">Name (A-Z)</option>
+                <option value="price-asc">Price (Low to High)</option>
+                <option value="price-desc">Price (High to Low)</option>
+              </select>
+            </div>
+          </div>
+          <div class="catalog__filters-panel" id="catalog-filters-panel" aria-label="Filters container">
+            <div class="catalog__filters-row" aria-label="Container">
+              <div class="catalog__filters-column catalog__filters-column--rating" aria-label="Container">
+                <h3 class="catalog__filters-heading">
+                  <span class="catalog__filters-heading-text">Minimum Rating</span>
+                </h3>
+                <div class="catalog__filters-track" aria-label="Container">
+                  <div class="catalog__rating-options">
+                    <div class="catalog__rating-option">
+                      <button type="button" role="checkbox" aria-checked="false" data-state="unchecked" class="catalog__rating-checkbox" id="rating-5">
+                        <span data-state="unchecked" class="catalog__rating-checkbox-indicator" style="pointer-events: none">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="catalog__rating-checkbox-check">
+                            <path d="M20 6 9 17l-5-5"></path>
+                          </svg>
+                        </span>
+                      </button>
+                      <label class="catalog__rating-label" for="rating-5">5+ Stars</label>
+                    </div>
+                    <div class="catalog__rating-option">
+                      <button type="button" role="checkbox" aria-checked="false" data-state="unchecked" class="catalog__rating-checkbox" id="rating-4">
+                        <span data-state="unchecked" class="catalog__rating-checkbox-indicator" style="pointer-events: none">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="catalog__rating-checkbox-check">
+                            <path d="M20 6 9 17l-5-5"></path>
+                          </svg>
+                        </span>
+                      </button>
+                      <label class="catalog__rating-label" for="rating-4">4+ Stars</label>
+                    </div>
+                    <div class="catalog__rating-option">
+                      <button type="button" role="checkbox" aria-checked="false" data-state="unchecked" class="catalog__rating-checkbox" id="rating-3">
+                        <span data-state="unchecked" class="catalog__rating-checkbox-indicator" style="pointer-events: none">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="catalog__rating-checkbox-check">
+                            <path d="M20 6 9 17l-5-5"></path>
+                          </svg>
+                        </span>
+                      </button>
+                      <label class="catalog__rating-label" for="rating-3">3+ Stars</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="catalog__filters-column catalog__filters-column--price" aria-label="Price range">
+                <h3 class="catalog__filters-heading catalog__filters-heading--price">
+                  <span class="catalog__filters-heading-text catalog__filters-heading-text--price">Price Range</span>
+                </h3>
+                <div class="catalog__price-range">
+                  <div class="catalog__price-range-sliders">
+                    <div class="catalog__price-range-track" aria-hidden="true">
+                      <div class="catalog__price-range-fill" id="catalog-price-range-fill"></div>
+                    </div>
+                    <input
+                      type="range"
+                      id="catalog-price-min"
+                      class="catalog__price-range-input catalog__price-range-input--min"
+                      min="0"
+                      max="400"
+                      value="0"
+                      step="1"
+                      aria-label="Minimum price"
+                    />
+                    <input
+                      type="range"
+                      id="catalog-price-max"
+                      class="catalog__price-range-input catalog__price-range-input--max"
+                      min="0"
+                      max="400"
+                      value="400"
+                      step="1"
+                      aria-label="Maximum price"
+                    />
+                  </div>
+                  <div class="catalog__price-range-labels">
+                    <span class="catalog__price-range-label" id="catalog-price-label-min">$0</span>
+                    <span class="catalog__price-range-label" id="catalog-price-label-max">$400</span>
+                  </div>
+                </div>
+              </div>
+              <div class="catalog__filters-clear-wrap">
+                <button type="button" class="catalog__filters-clear" id="catalog-clear-filters">Clear All Filters</button>
+              </div>
+            </div>
+          </div>
+          <div class="catalog__container-quaternary" aria-label="Container">
+            <div class="catalog__product-container" aria-label="Container">
+              <a class="catalog__product-link group" href="/product/5" aria-label="Product">
+                <img
+                  src="https://images.unsplash.com/photo-1673297821205-e0575bbc2ab7?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwYWludCUyMGNhbnMlMjBjb25zdHJ1Y3Rpb24lMjBzdXBwbGllc3xlbnwxfHx8fDE3NzExODUyNzN8MA&amp;ixlib=rb-4.1.0&amp;q=80&amp;w=1080&amp;utm_source=figma&amp;utm_medium=referral"
+                  alt="Exterior Paint Set"
+                  class="catalog__product-image w-full h-full object-cover group-hover:scale-105 transition duration-300"
+                />
+              </a>
+              <a class="catalog__product-info-link" href="/product/5" aria-label="Product info link">
+                <span class="catalog__product-title">Exterior Paint Set</span>
+              </a>
+              <div class="catalog__rating" aria-label="Product rating">
+                <svg class="catalog__rating-star catalog__rating-star--filled" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path>
+                </svg>
+                <svg class="catalog__rating-star catalog__rating-star--filled" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path>
+                </svg>
+                <svg class="catalog__rating-star catalog__rating-star--filled" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path>
+                </svg>
+                <svg class="catalog__rating-star catalog__rating-star--filled" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M12 18.338a2.1 2.1 0 0 0-.987.244L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.12 2.12 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.12 2.12 0 0 0 1.597-1.16l2.309-4.679A.53.53 0 0 1 12 2"></path>
+                </svg>
+                <svg class="catalog__rating-star catalog__rating-star--empty" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path>
+                </svg>
+                <span class="catalog__rating-value">(3.5)</span>
+              </div>
+              <p class="catalog__product-price">$45.99</p>
+              <p class="catalog__product-paragraph">
+                <span class="catalog__product-category">Paint &amp; Coatings</span>
+              </p>
+              <button class="catalog__product-button" type="button">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="catalog__product-button-icon"
+                  aria-hidden="true"
+                >
+                  <circle cx="8" cy="21" r="1"></circle>
+                  <circle cx="19" cy="21" r="1"></circle>
+                  <path
+                    d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"
+                  ></path>
+                </svg>
+                <span class="catalog__product-button-text">Add to Cart</span>
+              </button>
+            </div>
+            <div class="catalog__product-container catalog__product-container--2" aria-label="Container">
+              <a class="catalog__product-link group" href="/product/6" aria-label="Product">
+                <img
+                  src="https://images.unsplash.com/photo-1704167674713-649193461719?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwbHl3b29kJTIwc2hlZXRzJTIwY29uc3RydWN0aW9uJTIwbWF0ZXJpYWx8ZW58MXx8fHwxNzcxMDczNjEzfDA&amp;ixlib=rb-4.1.0&amp;q=80&amp;w=1080&amp;utm_source=figma&amp;utm_medium=referral"
+                  alt="Plywood Sheets"
+                  class="catalog__product-image w-full h-full object-cover group-hover:scale-105 transition duration-300"
+                />
+              </a>
+              <a class="catalog__product-info-link" href="/product/6" aria-label="Product info link">
+                <span class="catalog__product-title">Plywood Sheets</span>
+              </a>
+              <div class="catalog__rating" aria-label="Product rating">
+                <svg class="catalog__rating-star catalog__rating-star--filled" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path>
+                </svg>
+                <svg class="catalog__rating-star catalog__rating-star--filled" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path>
+                </svg>
+                <svg class="catalog__rating-star catalog__rating-star--filled" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path>
+                </svg>
+                <svg class="catalog__rating-star catalog__rating-star--filled" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path>
+                </svg>
+                <svg class="catalog__rating-star catalog__rating-star--filled" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M12 18.338a2.1 2.1 0 0 0-.987.244L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.12 2.12 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.12 2.12 0 0 0 1.597-1.16l2.309-4.679A.53.53 0 0 1 12 2"></path>
+                </svg>
+                <span class="catalog__rating-value">(4.5)</span>
+              </div>
+              <p class="catalog__product-price">$52.99</p>
+              <p class="catalog__product-paragraph">
+                <span class="catalog__product-category">Wood &amp; Lumber</span>
+              </p>
+              <button class="catalog__product-button" type="button">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="catalog__product-button-icon"
+                  aria-hidden="true"
+                >
+                  <circle cx="8" cy="21" r="1"></circle>
+                  <circle cx="19" cy="21" r="1"></circle>
+                  <path
+                    d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"
+                  ></path>
+                </svg>
+                <span class="catalog__product-button-text">Add to Cart</span>
+              </button>
+            </div>
+            <div class="catalog__product-container catalog__product-container--3" aria-label="Container">
+              <a class="catalog__product-link group" href="/product/1" aria-label="Product">
+                <img
+                  src="https://images.unsplash.com/photo-1718117075248-3d3c3cd65264?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb25zdHJ1Y3Rpb24lMjBjZW1lbnQlMjBiYWdzJTIwd2FyZWhvdXNlfGVufDF8fHx8MTc3MTE4NDE1OHww&amp;ixlib=rb-4.1.0&amp;q=80&amp;w=1080&amp;utm_source=figma&amp;utm_medium=referral"
+                  alt="Premium Cement Bags"
+                  class="catalog__product-image w-full h-full object-cover group-hover:scale-105 transition duration-300"
+                />
+              </a>
+              <a class="catalog__product-info-link" href="/product/1" aria-label="Product info link">
+                <span class="catalog__product-title">Premium Cement Bags</span>
+              </a>
+              <div class="catalog__rating" aria-label="Product rating">
+                <svg class="catalog__rating-star catalog__rating-star--filled" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path>
+                </svg>
+                <svg class="catalog__rating-star catalog__rating-star--filled" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path>
+                </svg>
+                <svg class="catalog__rating-star catalog__rating-star--filled" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path>
+                </svg>
+                <svg class="catalog__rating-star catalog__rating-star--filled" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path>
+                </svg>
+                <svg class="catalog__rating-star catalog__rating-star--filled" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path>
+                </svg>
+                <span class="catalog__rating-value">(5.0)</span>
+              </div>
+              <p class="catalog__product-price">$24.99</p>
+              <p class="catalog__product-paragraph">
+                <span class="catalog__product-category">Cement &amp; Concrete</span>
+              </p>
+              <button class="catalog__product-button" type="button">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="catalog__product-button-icon"
+                  aria-hidden="true"
+                >
+                  <circle cx="8" cy="21" r="1"></circle>
+                  <circle cx="19" cy="21" r="1"></circle>
+                  <path
+                    d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"
+                  ></path>
+                </svg>
+                <span class="catalog__product-button-text">Add to Cart</span>
+              </button>
+            </div>
+            <div class="catalog__product-container catalog__product-container--4" aria-label="Container">
+              <a class="catalog__product-link group" href="/product/2" aria-label="Product">
+                <img
+                  src="https://images.unsplash.com/photo-1764025390519-1ccc15d719a8?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxidWlsZGluZyUyMG1hdGVyaWFscyUyMHdvb2QlMjBsdW1iZXIlMjBwbGFua3N8ZW58MXx8fHwxNzcxMTg1MjcyfDA&amp;ixlib=rb-4.1.0&amp;q=80&amp;w=1080&amp;utm_source=figma&amp;utm_medium=referral"
+                  alt="Premium Lumber Planks"
+                  class="catalog__product-image w-full h-full object-cover group-hover:scale-105 transition duration-300"
+                />
+              </a>
+              <a class="catalog__product-info-link" href="/product/2" aria-label="Product info link">
+                <span class="catalog__product-title">Premium Lumber Planks</span>
+              </a>
+              <div class="catalog__rating" aria-label="Product rating">
+                <svg class="catalog__rating-star catalog__rating-star--filled" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path>
+                </svg>
+                <svg class="catalog__rating-star catalog__rating-star--filled" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path>
+                </svg>
+                <svg class="catalog__rating-star catalog__rating-star--filled" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path>
+                </svg>
+                <svg class="catalog__rating-star catalog__rating-star--filled" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path>
+                </svg>
+                <svg class="catalog__rating-star catalog__rating-star--filled" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M12 18.338a2.1 2.1 0 0 0-.987.244L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.12 2.12 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.12 2.12 0 0 0 1.597-1.16l2.309-4.679A.53.53 0 0 1 12 2"></path>
+                </svg>
+                <span class="catalog__rating-value">(4.5)</span>
+              </div>
+              <p class="catalog__product-price">$89.99</p>
+              <p class="catalog__product-paragraph">
+                <span class="catalog__product-category">Wood &amp; Lumber</span>
+              </p>
+              <button class="catalog__product-button" type="button">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="catalog__product-button-icon"
+                  aria-hidden="true"
+                >
+                  <circle cx="8" cy="21" r="1"></circle>
+                  <circle cx="19" cy="21" r="1"></circle>
+                  <path
+                    d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"
+                  ></path>
+                </svg>
+                <span class="catalog__product-button-text">Add to Cart</span>
+              </button>
+            </div>
+            <div class="catalog__product-container catalog__product-container--5" aria-label="Container">
+              <a class="catalog__product-link group" href="/product/3" aria-label="Product">
+                <img
+                  src="https://images.unsplash.com/photo-1761358270922-5a4df4ab9782?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb25zdHJ1Y3Rpb24lMjBicmlja3MlMjByZWQlMjBzdGFja3xlbnwxfHx8fDE3NzExODUyNzJ8MA&amp;ixlib=rb-4.1.0&amp;q=80&amp;w=1080&amp;utm_source=figma&amp;utm_medium=referral"
+                  alt="Red Clay Bricks"
+                  class="catalog__product-image w-full h-full object-cover group-hover:scale-105 transition duration-300"
+                />
+              </a>
+              <a class="catalog__product-info-link" href="/product/3" aria-label="Product info link">
+                <span class="catalog__product-title">Red Clay Bricks</span>
+              </a>
+              <div class="catalog__rating" aria-label="Product rating">
+                <svg class="catalog__rating-star catalog__rating-star--filled" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path>
+                </svg>
+                <svg class="catalog__rating-star catalog__rating-star--filled" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path>
+                </svg>
+                <svg class="catalog__rating-star catalog__rating-star--filled" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path>
+                </svg>
+                <svg class="catalog__rating-star catalog__rating-star--filled" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path>
+                </svg>
+                <svg class="catalog__rating-star catalog__rating-star--empty" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path>
+                </svg>
+                <span class="catalog__rating-value">(4.0)</span>
+              </div>
+              <p class="catalog__product-price">$0.89</p>
+              <p class="catalog__product-paragraph">
+                <span class="catalog__product-category">Bricks &amp; Blocks</span>
+              </p>
+              <button class="catalog__product-button" type="button">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="catalog__product-button-icon"
+                  aria-hidden="true"
+                >
+                  <circle cx="8" cy="21" r="1"></circle>
+                  <circle cx="19" cy="21" r="1"></circle>
+                  <path
+                    d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"
+                  ></path>
+                </svg>
+                <span class="catalog__product-button-text">Add to Cart</span>
+              </button>
+            </div>
+            <div class="catalog__product-container catalog__product-container--6" aria-label="Container">
+              <a class="catalog__product-link group" href="/product/4" aria-label="Product">
+                <img
+                  src="https://images.unsplash.com/photo-1707236527163-bd3478178466?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxzdGVlbCUyMGJlYW1zJTIwY29uc3RydWN0aW9uJTIwbWV0YWx8ZW58MXx8fHwxNzcxMTg1MjcyfDA&amp;ixlib=rb-4.1.0&amp;q=80&amp;w=1080&amp;utm_source=figma&amp;utm_medium=referral"
+                  alt="Steel I-Beams"
+                  class="catalog__product-image w-full h-full object-cover group-hover:scale-105 transition duration-300"
+                />
+              </a>
+              <a class="catalog__product-info-link" href="/product/4" aria-label="Product info link">
+                <span class="catalog__product-title">Steel I-Beams</span>
+              </a>
+              <div class="catalog__rating" aria-label="Product rating">
+                <svg class="catalog__rating-star catalog__rating-star--filled" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path>
+                </svg>
+                <svg class="catalog__rating-star catalog__rating-star--filled" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path>
+                </svg>
+                <svg class="catalog__rating-star catalog__rating-star--filled" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path>
+                </svg>
+                <svg class="catalog__rating-star catalog__rating-star--filled" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path>
+                </svg>
+                <svg class="catalog__rating-star catalog__rating-star--filled" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path>
+                </svg>
+                <span class="catalog__rating-value">(5.0)</span>
+              </div>
+              <p class="catalog__product-price">$349.99</p>
+              <p class="catalog__product-paragraph">
+                <span class="catalog__product-category">Steel &amp; Metal</span>
+              </p>
+              <button class="catalog__product-button" type="button">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="catalog__product-button-icon"
+                  aria-hidden="true"
+                >
+                  <circle cx="8" cy="21" r="1"></circle>
+                  <circle cx="19" cy="21" r="1"></circle>
+                  <path
+                    d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"
+                  ></path>
+                </svg>
+                <span class="catalog__product-button-text">Add to Cart</span>
+              </button>
+            </div>
+          </div>
+        </section>
+      </div>
+      <footer class="footer">
+        <div class="footer__container">
+          <div class="footer__top">
+          <div class="footer__top-item">
+            <p class="footer__top-title">BuildMart</p>
+            <p class="footer__top-text">
+              Your trusted source for premium building materials and construction supplies since 1995.
+            </p>
+            <div class="footer__social" aria-label="Social media">
+              <a class="footer__social-link" href="#" aria-label="Facebook">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+                </svg>
+              </a>
+              <a class="footer__social-link" href="#" aria-label="Twitter">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path>
+                </svg>
+              </a>
+              <a class="footer__social-link" href="#" aria-label="Instagram">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
+                  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                  <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line>
+                </svg>
+              </a>
+              <a class="footer__social-link" href="#" aria-label="LinkedIn">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                  <rect width="4" height="12" x="2" y="9"></rect>
+                  <circle cx="4" cy="4" r="2"></circle>
+                </svg>
+              </a>
+            </div>
+          </div>
+          <div class="footer__top-item">
+            <p class="footer__top-title">Quick Links</p>
+            <ul class="footer__links">
+              <li><a class="footer__link" href="#">About Us</a></li>
+              <li><a class="footer__link" href="#">Products</a></li>
+              <li><a class="footer__link" href="#">Delivery Info</a></li>
+              <li><a class="footer__link" href="#">Returns Policy</a></li>
+            </ul>
+          </div>
+          <div class="footer__top-item">
+            <p class="footer__top-title">Customer Service</p>
+            <ul class="footer__links">
+              <li><a class="footer__link" href="#">Contact Us</a></li>
+              <li><a class="footer__link" href="#">FAQs</a></li>
+              <li><a class="footer__link" href="#">Shipping &amp; Tracking</a></li>
+              <li><a class="footer__link" href="#">Privacy Policy</a></li>
+            </ul>
+          </div>
+          <div class="footer__top-item">
+            <p class="footer__top-title">Newsletter</p>
+            <p class="footer__top-text">Subscribe for updates and exclusive deals.</p>
+            <form class="footer__newsletter" action="#" method="post">
+              <label class="footer__visually-hidden" for="footer-email">Your email</label>
+              <input
+                id="footer-email"
+                class="footer__input"
+                type="email"
+                name="email"
+                placeholder="Your email"
+                autocomplete="email"
+              />
+              <button class="footer__button" type="submit" aria-label="Subscribe">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <rect width="20" height="16" x="2" y="4" rx="2"></rect>
+                  <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+                </svg>
+              </button>
+            </form>
+          </div>
+        </div>
+
+          <div class="footer__contacts">
+            <div class="footer__contacts-grid">
+            <div class="footer__contacts-item">
+              <p class="footer__contacts-title">Phone</p>
+              <p class="footer__contacts-text">1-800-BUILD-MART</p>
+            </div>
+            <div class="footer__contacts-item">
+              <p class="footer__contacts-title">Email</p>
+              <p class="footer__contacts-text">support@buildmart.com</p>
+            </div>
+            <div class="footer__contacts-item">
+              <p class="footer__contacts-title">Address</p>
+              <p class="footer__contacts-text">123 Construction Ave, Builder City, BC 12345</p>
+            </div>
+          </div>
+        </div>
+          <div class="footer__bottom">
+            <p class="footer__copyright">© 2026 BuildMart. All rights reserved.</p>
+          </div>
+        </div>
+      </footer>
+    </main>
+    <script src="scripts/catalog.js"></script>
+  </body>
+</html>
