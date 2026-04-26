@@ -86,8 +86,65 @@
 
           <section class="card-page__product-card" aria-label="Product card">
             <div class="card-page__left">
-              <div class="card-page__hero"></div>
-              <div class="card-page__thumbnails"></div>
+              <div class="card-page__hero">
+                <img
+                  id="card-gallery-main"
+                  class="card-page__hero-img"
+                  src="images/photo1.jpg"
+                  width="584"
+                  height="584"
+                  alt="Exterior Paint Set — product photo"
+                />
+                <button
+                  type="button"
+                  class="card-page__nav card-page__nav--prev"
+                  id="card-gallery-prev"
+                  aria-label="Previous image"
+                >
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <path d="m15 18-6-6 6-6"></path>
+                  </svg>
+                </button>
+                <button
+                  type="button"
+                  class="card-page__nav card-page__nav--next"
+                  id="card-gallery-next"
+                  aria-label="Next image"
+                >
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <path d="m9 18 6-6-6-6"></path>
+                  </svg>
+                </button>
+              </div>
+              <div class="card-page__thumbnails" role="group" aria-label="Product photos">
+                <button
+                  type="button"
+                  class="card-page__thumb is-active"
+                  data-full-src="images/photo1.jpg"
+                  aria-label="Show photo 1"
+                  aria-pressed="true"
+                >
+                  <img src="images/photo1.jpg" alt="" />
+                </button>
+                <button
+                  type="button"
+                  class="card-page__thumb"
+                  data-full-src="images/photo1.jpg"
+                  aria-label="Show photo 2"
+                  aria-pressed="false"
+                >
+                  <img src="images/photo1.jpg" alt="" />
+                </button>
+                <button
+                  type="button"
+                  class="card-page__thumb"
+                  data-full-src="images/photo1.jpg"
+                  aria-label="Show photo 3"
+                  aria-pressed="false"
+                >
+                  <img src="images/photo1.jpg" alt="" />
+                </button>
+              </div>
             </div>
 
             <div class="card-page__right"></div>
@@ -194,5 +251,6 @@
         </div>
       </footer>
     </main>
+    <script src="scripts/card.js"></script>
   </body>
 </html>
