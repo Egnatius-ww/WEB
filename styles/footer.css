@@ -1,7 +1,6 @@
 .footer {
   box-sizing: border-box;
   width: 100%;
-  min-height: 454px;
   margin-top: auto;
   background: #101828;
   color: #94a3b8;
@@ -16,8 +15,7 @@
   padding: 48px 16px;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
-  gap: 32px;
+  justify-content: flex-start;
   align-items: stretch;
 }
 
@@ -42,19 +40,18 @@
 }
 
 .footer__top-item {
-  min-height: 164px;
   padding: 0;
 }
 
 .footer__top-title {
-  margin: 0 0 12px;
-  font-size: 16px;
+  margin: 0 0 16px;
+  font-size: 18px;
   font-weight: 700;
   color: #ffffff;
 }
 
 .footer__top-text {
-  margin: 0 0 14px;
+  margin: 0 0 16px;
   font-size: 14px;
 }
 
@@ -113,8 +110,9 @@
 .footer__input {
   flex: 1;
   min-width: 0;
-  min-height: 32px;
-  padding: 0 10px;
+  padding: 8px 12px;
+  font-size: 14px;
+  line-height: 1.25;
   border: 1px solid #1f2937;
   border-right: 0;
   border-radius: 8px 0 0 8px;
@@ -123,8 +121,7 @@
 }
 
 .footer__button {
-  min-height: 32px;
-  padding: 0 12px;
+  padding: 8px 16px;
   border: 1px solid #ff5400;
   border-radius: 0 8px 8px 0;
   background: #ff5400;
@@ -179,9 +176,6 @@
   display: flex;
   flex-direction: column;
   gap: 4px;
-  min-height: 60px;
-  padding: 8px 0;
-  justify-content: center;
 }
 
 .footer__contacts-title {
