@@ -1,7 +1,8 @@
-/**
- * Shared catalog ↔ product card data. IDs match ?id= on card.html and catalog links.
- */
 (function () {
+  function spec(label, value) {
+    return { label: label, value: value };
+  }
+
   var P = [
     {
       id: "exterior-paint",
@@ -14,12 +15,12 @@
       description:
         "Professional-grade exterior paint set designed to withstand harsh weather conditions. This premium paint offers excellent coverage, durability, and color retention. Perfect for residential and commercial exterior surfaces.",
       specs: [
-        { label: "Volume", value: "5 gallons total" },
-        { label: "Type", value: "100% Acrylic Latex" },
-        { label: "Coverage", value: "400 sq ft per gallon" },
-        { label: "Finish", value: "Satin" },
-        { label: "Dry Time", value: "2–4 hours" },
-        { label: "Colors", value: "Assorted neutral tones" },
+        spec("Volume", "5 gallons total"),
+        spec("Type", "100% Acrylic Latex"),
+        spec("Coverage", "400 sq ft per gallon"),
+        spec("Finish", "Satin"),
+        spec("Dry Time", "2–4 hours"),
+        spec("Colors", "Assorted neutral tones"),
       ],
     },
     {
@@ -31,14 +32,14 @@
       image:
         "https://images.unsplash.com/photo-1704167674713-649193461719?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
       description:
-        "High-quality structural plywood for framing, sheathing, and general construction. Sanded faces and consistent thickness for reliable results on the job site.",
+        "Versatile construction-grade plywood sheets suitable for a wide range of applications. These sheets are engineered for strength and dimensional stability, perfect for subfloors, roofing, walls, and general construction.",
       specs: [
-        { label: "Thickness", value: "3/4 in" },
-        { label: "Grade", value: "BC" },
-        { label: "Core", value: "Softwood veneer" },
-        { label: "Sheet size", value: "4 ft × 8 ft" },
-        { label: "Moisture", value: "Exterior glue" },
-        { label: "Application", value: "Sheathing, subfloor" },
+        spec("Dimensions", "4' × 8'"),
+        spec("Thickness", "3/4 inch"),
+        spec("Grade", "CDX"),
+        spec("Plies", "7-ply construction"),
+        spec("Exposure", "Exterior grade"),
+        spec("Veneer", "Softwood"),
       ],
     },
     {
@@ -50,14 +51,14 @@
       image:
         "https://images.unsplash.com/photo-1718117075248-3d3c3cd65264?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
       description:
-        "Portland cement blend for foundations, slabs, and masonry work. Consistent setting time and strong compressive strength for structural pours.",
+        "High-quality Portland cement bags designed for heavy-duty construction projects. Our premium cement offers exceptional strength, durability, and workability. Ideal for foundations, structural work, and general concrete applications. Each bag contains precisely measured and tested cement that meets international quality standards.",
       specs: [
-        { label: "Weight", value: "94 lb per bag" },
-        { label: "Type", value: "Type I/II" },
-        { label: "Yield", value: "~1 cu ft per bag" },
-        { label: "Set time", value: "Initial 45–60 min" },
-        { label: "Use", value: "Concrete, mortar, grout" },
-        { label: "Storage", value: "Dry, covered" },
+        spec("Weight", "50 lbs per bag"),
+        spec("Type", "Portland Cement Type I/II"),
+        spec("Compressive strength", "3500 PSI at 28 days"),
+        spec("Setting time", "2–4 hours initial set"),
+        spec("Coverage", "Approximately 0.45 cubic feet"),
+        spec("Storage life", "6 months in sealed bag"),
       ],
     },
     {
@@ -69,14 +70,14 @@
       image:
         "https://images.unsplash.com/photo-1764025390519-1ccc15d719a8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
       description:
-        "Kiln-dried dimensional lumber selected for straight grain and minimal warp. Ideal for framing, decking, and visible interior projects.",
+        "Premium kiln-dried lumber planks perfect for all your woodworking and construction needs. These high-grade wooden planks are carefully selected for strength and appearance. Suitable for framing, decking, furniture making, and various carpentry projects.",
       specs: [
-        { label: "Species", value: "SPF" },
-        { label: "Dimension", value: "2 in × 6 in × 12 ft" },
-        { label: "Grade", value: "#2 & better" },
-        { label: "Moisture", value: "Kiln-dried ~15%" },
-        { label: "Treatment", value: "None (interior)" },
-        { label: "Bundle", value: "Sold per piece" },
+        spec("Dimensions", "2\" × 6\" × 8'"),
+        spec("Wood type", "Douglas Fir"),
+        spec("Grade", "Premium Select"),
+        spec("Moisture content", "15% kiln-dried"),
+        spec("Treatment", "Pressure-treated option available"),
+        spec("Quantity", "Sold individually"),
       ],
     },
     {
@@ -88,14 +89,14 @@
       image:
         "https://images.unsplash.com/photo-1761358270922-5a4df4ab9782?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
       description:
-        "Classic fired clay bricks for walls, paths, and veneer. Uniform size and rich color for traditional masonry finishes.",
+        "Traditional red clay bricks manufactured to the highest standards. These durable bricks are perfect for walls, patios, pathways, and architectural features. Fire-hardened for exceptional strength and weather resistance.",
       specs: [
-        { label: "Size", value: "Standard modular" },
-        { label: "Color", value: "Red/brown blend" },
-        { label: "Compressive strength", value: "3000+ PSI" },
-        { label: "Absorption", value: "Moderate" },
-        { label: "Sold", value: "Per brick" },
-        { label: "Use", value: "Veneer, garden, repair" },
+        spec("Dimensions", "8\" × 4\" × 2.25\""),
+        spec("Material", "Fire-hardened clay"),
+        spec("Compressive strength", "3000+ PSI"),
+        spec("Water absorption", "Less than 8%"),
+        spec("Color", "Classic red"),
+        spec("Weight", "4.5 lbs per brick"),
       ],
     },
     {
@@ -107,22 +108,17 @@
       image:
         "https://images.unsplash.com/photo-1707236527163-bd3478178466?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
       description:
-        "Structural steel wide-flange beams for load-bearing spans. Mill-certified material suitable for commercial and residential steel framing.",
+        "Heavy-duty structural steel I-beams engineered for maximum load-bearing capacity. These professional-grade beams are essential for large construction projects, building frames, and structural support applications.",
       specs: [
-        { label: "Profile", value: "W-shape wide flange" },
-        { label: "Length", value: "20 ft (typical)" },
-        { label: "Grade", value: "A992 / A572" },
-        { label: "Finish", value: "Mill scale" },
-        { label: "Certification", value: "Mill test reports available" },
-        { label: "Handling", value: "Crane or forklift" },
+        spec("Length", "20 feet"),
+        spec("Profile", "W10x49"),
+        spec("Material", "ASTM A992 Grade 50 Steel"),
+        spec("Weight", "980 lbs"),
+        spec("Yield strength", "50 ksi"),
+        spec("Finish", "Mill finish"),
       ],
     },
   ];
-
-  P.forEach(function (item) {
-    var u = item.image;
-    item.gallery = [u, u, u];
-  });
 
   window.BUILDMART_PRODUCTS = P;
 
