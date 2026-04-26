@@ -1,4 +1,4 @@
-﻿(function () {
+(function () {
   var DEFAULT_ID = "exterior-paint";
   var ICONS_SPRITE = "../assets/icons.svg#";
 
@@ -250,8 +250,27 @@
     product = window.getBuildmartProductById(DEFAULT_ID) || window.BUILDMART_PRODUCTS[0];
   }
 
+  function initAddToCart(p) {
+    if (!p || !window.BuildmartCart) return;
+    var btn = document.querySelector(".card-page__btn--primary");
+    if (!btn) return;
+    btn.addEventListener("click", function () {
+      var inp = document.getElementById("card-qty");
+      var n = Math.max(1, parseInt(inp && inp.value, 10) || 1);
+      window.BuildmartCart.add(p.id, n);
+      if (window.showBuildmartToast && p && p.title) {
+        if (n <= 1) {
+          window.showBuildmartToast("Added " + p.title + " to cart");
+        } else {
+          window.showBuildmartToast("Added " + n + " × " + p.title + " to cart");
+        }
+      }
+    });
+  }
+
   applyProduct(product);
   initGallery();
   initQty();
+  initAddToCart(product);
 })();
 
