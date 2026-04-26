@@ -1,0 +1,108 @@
+.buildmart-toast-stack {
+  --buildmart-toast-overlap: 52px;
+  position: fixed;
+  top: max(12px, env(safe-area-inset-top, 0px));
+  right: max(16px, env(safe-area-inset-right, 0px));
+  z-index: 10001;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  width: min(400px, calc(100vw - 32px));
+  pointer-events: none;
+}
+
+.buildmart-toast-item {
+  position: relative;
+  box-sizing: border-box;
+  width: 100%;
+  flex: 0 0 auto;
+  transform: translateY(calc(-100% - 20px));
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    transform 0.36s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.3s ease;
+}
+
+.buildmart-toast-stack > .buildmart-toast-item:not(:first-child) {
+  margin-top: calc(-1 * var(--buildmart-toast-overlap, 52px));
+}
+
+.buildmart-toast-stack > .buildmart-toast-item:nth-child(1) {
+  z-index: 106;
+}
+
+.buildmart-toast-stack > .buildmart-toast-item:nth-child(2) {
+  z-index: 105;
+}
+
+.buildmart-toast-stack > .buildmart-toast-item:nth-child(3) {
+  z-index: 104;
+}
+
+.buildmart-toast-stack > .buildmart-toast-item:nth-child(4) {
+  z-index: 103;
+}
+
+.buildmart-toast-stack > .buildmart-toast-item:nth-child(5) {
+  z-index: 102;
+}
+
+.buildmart-toast-item--in {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+  touch-action: pan-x;
+}
+
+.buildmart-toast-item--in.buildmart-toast-item--dragging {
+  touch-action: none;
+}
+
+.buildmart-toast-item--out {
+  transform: translateY(calc(-100% - 12px));
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    transform 0.28s ease-in,
+    opacity 0.22s ease;
+}
+
+.buildmart-toast__inner {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 18px;
+  border-radius: 12px;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  box-shadow:
+    0 10px 40px rgba(15, 23, 42, 0.12),
+    0 4px 12px rgba(15, 23, 42, 0.08);
+}
+
+.buildmart-toast__icon {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+}
+
+.buildmart-toast__icon svg {
+  display: block;
+}
+
+.buildmart-toast__text {
+  margin: 0;
+  font-family: Inter, system-ui, sans-serif;
+  font-size: 0.9375rem;
+  line-height: 1.375rem;
+  font-weight: 700;
+  letter-spacing: -0.2px;
+  color: #0a0a0a;
+}
