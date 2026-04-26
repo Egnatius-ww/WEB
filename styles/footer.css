@@ -41,6 +41,7 @@
 
 .footer__top-item {
   padding: 0;
+  min-width: 0;
 }
 
 .footer__top-title {
