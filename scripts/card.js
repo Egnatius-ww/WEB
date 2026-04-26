@@ -1,4 +1,4 @@
-﻿(function () {
+(function () {
   var DEFAULT_ID = "exterior-paint";
   var ICONS_SPRITE = "../assets/icons.svg#";
 
@@ -258,6 +258,13 @@
       var inp = document.getElementById("card-qty");
       var n = Math.max(1, parseInt(inp && inp.value, 10) || 1);
       window.BuildmartCart.add(p.id, n);
+      if (window.showBuildmartToast && p && p.title) {
+        if (n <= 1) {
+          window.showBuildmartToast("Added " + p.title + " to cart");
+        } else {
+          window.showBuildmartToast("Added " + n + " × " + p.title + " to cart");
+        }
+      }
     });
   }
 
