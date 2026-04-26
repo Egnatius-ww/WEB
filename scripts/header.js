@@ -25,8 +25,9 @@
       <span class="header__search-decoy" aria-hidden="true">
         <svg class="header__search-decoy-svg" width="24" height="24" aria-hidden="true"><use href="../assets/icons.svg#sym-search"></use></svg>
       </span>
-      <a class="header__action-link" href="/cart" aria-label="Open cart">
+      <a class="header__action-link" href="/html/cart.html" aria-label="Open cart">
         <svg class="header__cart-icon w-5 h-5" width="24" height="24" aria-hidden="true"><use href="../assets/icons.svg#sym-cart"></use></svg>
+        <span class="header__cart-badge" id="header-cart-badge" hidden aria-hidden="true">0</span>
       </a>
       <button type="button" class="header__icon-btn header__menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="header-mobile-panel">
         <svg class="header__icon-btn-svg" width="24" height="24" aria-hidden="true"><use href="../assets/icons.svg#sym-menu"></use></svg>
@@ -105,4 +106,21 @@
     },
     { passive: true }
   );
+
+  function syncHeaderCartBadge() {
+    var badge = document.getElementById("header-cart-badge");
+    var cart = window.BuildmartCart;
+    if (!badge || !cart || typeof cart.countItems !== "function") return;
+    var n = cart.countItems();
+    var label = n > 99 ? "99+" : String(Math.max(0, n));
+    badge.textContent = label;
+    badge.hidden = n < 1;
+    var link = badge.closest(".header__action-link");
+    if (link) {
+      link.setAttribute("aria-label", n < 1 ? "Open cart" : "Open cart, " + n + " items");
+    }
+  }
+
+  syncHeaderCartBadge();
+  window.addEventListener("buildmart-cart-changed", syncHeaderCartBadge);
 })();
