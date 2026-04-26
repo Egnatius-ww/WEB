@@ -8,8 +8,39 @@
   var getP = window.getBuildmartProductById;
   var cart = window.BuildmartCart;
 
+  var PROMO_STORAGE = "buildmartPromoCode";
+  var PROMO_VALID = "BUILD10";
+
+  try {
+    window.localStorage.removeItem(PROMO_STORAGE);
+  } catch (e) {}
+
   function fmt(n) {
     return "$" + (Math.round(Number(n) * 100) / 100).toFixed(2);
+  }
+
+  function roundMoney(n) {
+    return Math.round(Number(n) * 100) / 100;
+  }
+
+  function readAppliedPromo() {
+    try {
+      var c = window.sessionStorage.getItem(PROMO_STORAGE);
+      return c ? String(c).trim().toUpperCase() : "";
+    } catch (e) {
+      return "";
+    }
+  }
+
+  function setAppliedPromo(code) {
+    try {
+      if (!code) window.sessionStorage.removeItem(PROMO_STORAGE);
+      else window.sessionStorage.setItem(PROMO_STORAGE, String(code).trim().toUpperCase());
+    } catch (err) {}
+  }
+
+  function isPromoActive() {
+    return readAppliedPromo() === PROMO_VALID;
   }
 
   function renderCart() {
@@ -22,7 +53,7 @@
       filledState.hidden = true;
       listEl.innerHTML = "";
       document.title = "Cart - BuildMart";
-      updateTotals(0, 0, 0);
+      updateTotals(0, 0, 0, 0);
       return;
     }
 
@@ -97,18 +128,34 @@
       listEl.appendChild(art);
     });
 
-    var tax = Math.round(subtotal * 0.08 * 100) / 100;
-    var grand = subtotal + tax;
-    updateTotals(subtotal, tax, grand);
+    var discount = 0;
+    if (isPromoActive()) {
+      discount = roundMoney(subtotal * 0.1);
+    }
+    var afterDiscount = roundMoney(subtotal - discount);
+    var tax = roundMoney(afterDiscount * 0.08);
+    var grand = roundMoney(afterDiscount + tax);
+    updateTotals(subtotal, discount, tax, grand);
   }
 
-  function updateTotals(sub, tax, grand) {
+  function updateTotals(sub, discount, tax, grand) {
     var elS = document.getElementById("cart-subtotal");
     var elT = document.getElementById("cart-tax");
     var elG = document.getElementById("cart-grand");
+    var rowD = document.getElementById("cart-discount-row");
+    var elD = document.getElementById("cart-discount");
     if (elS) elS.textContent = fmt(sub);
     if (elT) elT.textContent = fmt(tax);
     if (elG) elG.textContent = fmt(grand);
+    if (rowD && elD) {
+      if (discount > 0) {
+        rowD.hidden = false;
+        elD.textContent = "-" + fmt(discount);
+      } else {
+        rowD.hidden = true;
+        elD.textContent = "-" + fmt(0);
+      }
+    }
   }
 
   if (listEl) {
@@ -155,5 +202,68 @@
     if (document.getElementById("cartPage")) renderCart();
   });
 
+  var promoInput = document.getElementById("cart-promo-input");
+  var promoHint = document.getElementById("cart-promo-hint");
+  var promoApply = document.getElementById("cart-promo-apply");
+  var promoFeedback = document.getElementById("cart-promo-feedback");
+
+  function syncPromoHint() {
+    if (!promoHint || !promoInput) return;
+    promoHint.hidden = promoInput.value.length < 1;
+  }
+
+  function setPromoFeedback(message, ok) {
+    if (!promoFeedback) return;
+    if (!message) {
+      promoFeedback.hidden = true;
+      promoFeedback.textContent = "";
+      promoFeedback.classList.remove("cart-page__promo-feedback--ok", "cart-page__promo-feedback--err");
+      return;
+    }
+    promoFeedback.hidden = false;
+    promoFeedback.textContent = message;
+    promoFeedback.classList.toggle("cart-page__promo-feedback--ok", ok === true);
+    promoFeedback.classList.toggle("cart-page__promo-feedback--err", ok !== true);
+  }
+
+  function onPromoApply() {
+    if (!promoInput) return;
+    var raw = promoInput.value.trim();
+    if (!raw) {
+      setAppliedPromo("");
+      setPromoFeedback("");
+      renderCart();
+      return;
+    }
+    if (raw.toUpperCase() === PROMO_VALID) {
+      setAppliedPromo(PROMO_VALID);
+      setPromoFeedback("10% discount applied.", true);
+      renderCart();
+      return;
+    }
+    setPromoFeedback("Invalid promo code.", false);
+  }
+
+  if (promoInput && promoHint) {
+    promoInput.addEventListener("input", syncPromoHint);
+    syncPromoHint();
+  }
+
+  if (promoApply) {
+    promoApply.addEventListener("click", onPromoApply);
+  }
+  if (promoInput) {
+    promoInput.addEventListener("keydown", function (e) {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        onPromoApply();
+      }
+    });
+  }
+
   renderCart();
+  if (promoInput && isPromoActive()) {
+    promoInput.value = PROMO_VALID;
+    syncPromoHint();
+  }
 })();

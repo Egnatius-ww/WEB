@@ -82,17 +82,23 @@
                 </div>
                 <section class="cart-page__promo" aria-label="Promo code">
                   <h3 class="cart-page__promo-title">Have a promo code?</h3>
-                  <div class="cart-page__promo-row">
-                    <label class="cart-page__promo-label" for="cart-promo-input">Promo code</label>
-                    <input
-                      class="cart-page__promo-input"
-                      id="cart-promo-input"
-                      type="text"
-                      name="promo"
-                      placeholder="Enter promo code"
-                      autocomplete="off"
-                    />
-                    <button class="cart-page__promo-apply" type="button" id="cart-promo-apply">Apply</button>
+                  <div class="cart-page__promo-fields">
+                    <div class="cart-page__promo-row">
+                      <label class="cart-page__promo-label" for="cart-promo-input">Promo code</label>
+                      <input
+                        class="cart-page__promo-input"
+                        id="cart-promo-input"
+                        type="text"
+                        name="promo"
+                        placeholder="Enter promo code"
+                        autocomplete="off"
+                      />
+                      <button class="cart-page__promo-apply" type="button" id="cart-promo-apply">Apply</button>
+                    </div>
+                    <p class="cart-page__promo-hint" id="cart-promo-hint" hidden>
+                      Try code: BUILD10 for 10% off
+                    </p>
+                    <p class="cart-page__promo-feedback" id="cart-promo-feedback" hidden role="status"></p>
                   </div>
                 </section>
               </div>
@@ -108,6 +114,10 @@
                     <div class="cart-page__order-row">
                       <span>Tax (8%)</span>
                       <strong id="cart-tax">$0.00</strong>
+                    </div>
+                    <div class="cart-page__order-discount" id="cart-discount-row" hidden>
+                      <span>Discount (10%)</span>
+                      <span id="cart-discount">-$0.00</span>
                     </div>
                     <div class="cart-page__order-divider"></div>
                     <div class="cart-page__order-row cart-page__order-row--grand">
@@ -201,10 +211,10 @@
       <div id="site-footer-mount"></div>
     </main>
 
-    <script src="../scripts/header.js"></script>
-    <script src="../scripts/footer.js"></script>
     <script src="../scripts/products.js"></script>
     <script src="../scripts/cart-store.js"></script>
+    <script src="../scripts/header.js"></script>
+    <script src="../scripts/footer.js"></script>
     <script src="../scripts/cart-page.js"></script>
   </body>
 </html>

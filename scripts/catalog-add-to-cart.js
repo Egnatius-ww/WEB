@@ -18,13 +18,10 @@
     if (!id) return;
     e.preventDefault();
     cart.add(id, 1);
-    var label = btn.querySelector(".catalog__product-button-text");
-    if (label) {
-      var prev = label.textContent;
-      label.textContent = "Added";
-      window.setTimeout(function () {
-        label.textContent = prev;
-      }, 900);
+    var titleEl = card.querySelector(".catalog__product-title");
+    var title = titleEl ? titleEl.textContent.trim() : "Item";
+    if (window.showBuildmartToast) {
+      window.showBuildmartToast("Added " + title + " to cart");
     }
   });
 })();
