@@ -1,0 +1,306 @@
+﻿<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BuildMart</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../styles/main.css" />
+    <link rel="stylesheet" href="../styles/header.css" />
+    <link rel="stylesheet" href="../styles/catalog.css" />
+    <link rel="stylesheet" href="../styles/footer.css" />
+  </head>
+  <body>
+    <main class="screen">
+      <div id="site-header-mount"></div>
+      <div class="screen__content">
+        <section class="catalog" aria-label="Main Content">
+          <div class="catalog__section" aria-label="Section">
+            <div class="catalog__container" aria-label="Container">
+              <h1 class="catalog__heading">
+                <span class="catalog__heading-text">Building Materials</span>
+              </h1>
+              <p class="catalog__paragraph">
+                <span class="catalog__paragraph-text">Premium construction supplies for all your projects</span>
+              </p>
+            </div>
+          </div>
+          <div class="catalog__container-secondary" aria-label="Container">
+            <div class="catalog__container-horizontal" aria-label="Container">
+              <button class="catalog__button" type="button" id="catalog-filters-toggle" aria-expanded="false" aria-controls="catalog-filters-panel">
+                <svg class="catalog__button-icon" width="24" height="24" aria-hidden="true"><use href="../assets/icons.svg#sym-filter"></use></svg>
+                <span class="catalog__button-text">Show Filters</span>
+              </button>
+              <p class="catalog__inline-paragraph text-gray-600">Showing 6 products</p>
+            </div>
+          </div>
+          <div class="catalog__container-tertiary" aria-label="Sort products">
+            <div class="catalog__sort">
+              <label class="catalog__sort-label" for="catalog-sort">Sort by:</label>
+              <select id="catalog-sort" class="catalog__dropdown" aria-label="Sort products">
+                <option value="name-asc">Name (A-Z)</option>
+                <option value="price-asc">Price (Low to High)</option>
+                <option value="price-desc">Price (High to Low)</option>
+              </select>
+            </div>
+          </div>
+          <div class="catalog__filters-panel" id="catalog-filters-panel" aria-label="Filters container">
+            <div class="catalog__filters-row" aria-label="Container">
+              <div class="catalog__filters-column catalog__filters-column--rating" aria-label="Container">
+                <h3 class="catalog__filters-heading">
+                  <span class="catalog__filters-heading-text">Minimum Rating</span>
+                </h3>
+                <div class="catalog__filters-track" aria-label="Container">
+                  <div class="catalog__rating-options">
+                    <div class="catalog__rating-option">
+                      <button type="button" role="checkbox" aria-checked="false" data-state="unchecked" class="catalog__rating-checkbox" id="rating-5">
+                        <span data-state="unchecked" class="catalog__rating-checkbox-indicator" style="pointer-events: none">
+                          <svg class="catalog__rating-checkbox-check" width="24" height="24" aria-hidden="true"><use href="../assets/icons.svg#sym-check"></use></svg>
+                        </span>
+                      </button>
+                      <label class="catalog__rating-label" for="rating-5">5+ Stars</label>
+                    </div>
+                    <div class="catalog__rating-option">
+                      <button type="button" role="checkbox" aria-checked="false" data-state="unchecked" class="catalog__rating-checkbox" id="rating-4">
+                        <span data-state="unchecked" class="catalog__rating-checkbox-indicator" style="pointer-events: none">
+                          <svg class="catalog__rating-checkbox-check" width="24" height="24" aria-hidden="true"><use href="../assets/icons.svg#sym-check"></use></svg>
+                        </span>
+                      </button>
+                      <label class="catalog__rating-label" for="rating-4">4+ Stars</label>
+                    </div>
+                    <div class="catalog__rating-option">
+                      <button type="button" role="checkbox" aria-checked="false" data-state="unchecked" class="catalog__rating-checkbox" id="rating-3">
+                        <span data-state="unchecked" class="catalog__rating-checkbox-indicator" style="pointer-events: none">
+                          <svg class="catalog__rating-checkbox-check" width="24" height="24" aria-hidden="true"><use href="../assets/icons.svg#sym-check"></use></svg>
+                        </span>
+                      </button>
+                      <label class="catalog__rating-label" for="rating-3">3+ Stars</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="catalog__filters-column catalog__filters-column--price" aria-label="Price range">
+                <h3 class="catalog__filters-heading catalog__filters-heading--price">
+                  <span class="catalog__filters-heading-text catalog__filters-heading-text--price">Price Range</span>
+                </h3>
+                <div class="catalog__price-range">
+                  <div class="catalog__price-range-sliders">
+                    <div class="catalog__price-range-track" aria-hidden="true">
+                      <div class="catalog__price-range-fill" id="catalog-price-range-fill"></div>
+                    </div>
+                    <input
+                      type="range"
+                      id="catalog-price-min"
+                      class="catalog__price-range-input catalog__price-range-input--min"
+                      min="0"
+                      max="400"
+                      value="0"
+                      step="1"
+                      aria-label="Minimum price"
+                    />
+                    <input
+                      type="range"
+                      id="catalog-price-max"
+                      class="catalog__price-range-input catalog__price-range-input--max"
+                      min="0"
+                      max="400"
+                      value="400"
+                      step="1"
+                      aria-label="Maximum price"
+                    />
+                  </div>
+                  <div class="catalog__price-range-labels">
+                    <span class="catalog__price-range-label" id="catalog-price-label-min">$0</span>
+                    <span class="catalog__price-range-label" id="catalog-price-label-max">$400</span>
+                  </div>
+                </div>
+              </div>
+              <div class="catalog__filters-clear-wrap">
+                <button type="button" class="catalog__filters-clear" id="catalog-clear-filters">Clear All Filters</button>
+              </div>
+            </div>
+          </div>
+          <div class="catalog__container-quaternary" aria-label="Container">
+            <div class="catalog__product-container" aria-label="Container">
+              <a class="catalog__product-link group" href="/html/card.html?id=exterior-paint" aria-label="Product">
+                <img
+                  src="https://images.unsplash.com/photo-1673297821205-e0575bbc2ab7?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwYWludCUyMGNhbnMlMjBjb25zdHJ1Y3Rpb24lMjBzdXBwbGllc3xlbnwxfHx8fDE3NzExODUyNzN8MA&amp;ixlib=rb-4.1.0&amp;q=80&amp;w=1080&amp;utm_source=figma&amp;utm_medium=referral"
+                  alt="Exterior Paint Set"
+                  class="catalog__product-image w-full h-full object-cover group-hover:scale-105 transition duration-300"
+                />
+              </a>
+              <a class="catalog__product-info-link" href="/html/card.html?id=exterior-paint" aria-label="Product info link">
+                <span class="catalog__product-title">Exterior Paint Set</span>
+              </a>
+              <div class="catalog__rating" aria-label="Product rating">
+                <svg class="catalog__rating-star catalog__rating-star--filled" viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#sym-star-full"></use></svg>
+                <svg class="catalog__rating-star catalog__rating-star--filled" viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#sym-star-full"></use></svg>
+                <svg class="catalog__rating-star catalog__rating-star--filled" viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#sym-star-full"></use></svg>
+                <svg class="catalog__rating-star catalog__rating-star--filled" viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#sym-star-half"></use></svg>
+                <svg class="catalog__rating-star catalog__rating-star--empty" viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#sym-star-empty"></use></svg>
+                <span class="catalog__rating-value">(3.5)</span>
+              </div>
+              <p class="catalog__product-price">$45.99</p>
+              <p class="catalog__product-paragraph">
+                <span class="catalog__product-category">Paint &amp; Coatings</span>
+              </p>
+              <button class="catalog__product-button" type="button">
+                <svg class="catalog__product-button-icon" width="24" height="24" aria-hidden="true"><use href="../assets/icons.svg#sym-cart"></use></svg>
+                <span class="catalog__product-button-text">Add to Cart</span>
+              </button>
+            </div>
+            <div class="catalog__product-container catalog__product-container--2" aria-label="Container">
+              <a class="catalog__product-link group" href="/html/card.html?id=plywood-sheets" aria-label="Product">
+                <img
+                  src="https://images.unsplash.com/photo-1704167674713-649193461719?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwbHl3b29kJTIwc2hlZXRzJTIwY29uc3RydWN0aW9uJTIwbWF0ZXJpYWx8ZW58MXx8fHwxNzcxMDczNjEzfDA&amp;ixlib=rb-4.1.0&amp;q=80&amp;w=1080&amp;utm_source=figma&amp;utm_medium=referral"
+                  alt="Plywood Sheets"
+                  class="catalog__product-image w-full h-full object-cover group-hover:scale-105 transition duration-300"
+                />
+              </a>
+              <a class="catalog__product-info-link" href="/html/card.html?id=plywood-sheets" aria-label="Product info link">
+                <span class="catalog__product-title">Plywood Sheets</span>
+              </a>
+              <div class="catalog__rating" aria-label="Product rating">
+                <svg class="catalog__rating-star catalog__rating-star--filled" viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#sym-star-full"></use></svg>
+                <svg class="catalog__rating-star catalog__rating-star--filled" viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#sym-star-full"></use></svg>
+                <svg class="catalog__rating-star catalog__rating-star--filled" viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#sym-star-full"></use></svg>
+                <svg class="catalog__rating-star catalog__rating-star--filled" viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#sym-star-full"></use></svg>
+                <svg class="catalog__rating-star catalog__rating-star--filled" viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#sym-star-half"></use></svg>
+                <span class="catalog__rating-value">(4.5)</span>
+              </div>
+              <p class="catalog__product-price">$52.99</p>
+              <p class="catalog__product-paragraph">
+                <span class="catalog__product-category">Wood &amp; Lumber</span>
+              </p>
+              <button class="catalog__product-button" type="button">
+                <svg class="catalog__product-button-icon" width="24" height="24" aria-hidden="true"><use href="../assets/icons.svg#sym-cart"></use></svg>
+                <span class="catalog__product-button-text">Add to Cart</span>
+              </button>
+            </div>
+            <div class="catalog__product-container catalog__product-container--3" aria-label="Container">
+              <a class="catalog__product-link group" href="/html/card.html?id=premium-cement-bags" aria-label="Product">
+                <img
+                  src="https://images.unsplash.com/photo-1718117075248-3d3c3cd65264?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb25zdHJ1Y3Rpb24lMjBjZW1lbnQlMjBiYWdzJTIwd2FyZWhvdXNlfGVufDF8fHx8MTc3MTE4NDE1OHww&amp;ixlib=rb-4.1.0&amp;q=80&amp;w=1080&amp;utm_source=figma&amp;utm_medium=referral"
+                  alt="Premium Cement Bags"
+                  class="catalog__product-image w-full h-full object-cover group-hover:scale-105 transition duration-300"
+                />
+              </a>
+              <a class="catalog__product-info-link" href="/html/card.html?id=premium-cement-bags" aria-label="Product info link">
+                <span class="catalog__product-title">Premium Cement Bags</span>
+              </a>
+              <div class="catalog__rating" aria-label="Product rating">
+                <svg class="catalog__rating-star catalog__rating-star--filled" viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#sym-star-full"></use></svg>
+                <svg class="catalog__rating-star catalog__rating-star--filled" viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#sym-star-full"></use></svg>
+                <svg class="catalog__rating-star catalog__rating-star--filled" viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#sym-star-full"></use></svg>
+                <svg class="catalog__rating-star catalog__rating-star--filled" viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#sym-star-full"></use></svg>
+                <svg class="catalog__rating-star catalog__rating-star--filled" viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#sym-star-full"></use></svg>
+                <span class="catalog__rating-value">(5.0)</span>
+              </div>
+              <p class="catalog__product-price">$24.99</p>
+              <p class="catalog__product-paragraph">
+                <span class="catalog__product-category">Cement &amp; Concrete</span>
+              </p>
+              <button class="catalog__product-button" type="button">
+                <svg class="catalog__product-button-icon" width="24" height="24" aria-hidden="true"><use href="../assets/icons.svg#sym-cart"></use></svg>
+                <span class="catalog__product-button-text">Add to Cart</span>
+              </button>
+            </div>
+            <div class="catalog__product-container catalog__product-container--4" aria-label="Container">
+              <a class="catalog__product-link group" href="/html/card.html?id=premium-lumber-planks" aria-label="Product">
+                <img
+                  src="https://images.unsplash.com/photo-1764025390519-1ccc15d719a8?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxidWlsZGluZyUyMG1hdGVyaWFscyUyMHdvb2QlMjBsdW1iZXIlMjBwbGFua3N8ZW58MXx8fHwxNzcxMTg1MjcyfDA&amp;ixlib=rb-4.1.0&amp;q=80&amp;w=1080&amp;utm_source=figma&amp;utm_medium=referral"
+                  alt="Premium Lumber Planks"
+                  class="catalog__product-image w-full h-full object-cover group-hover:scale-105 transition duration-300"
+                />
+              </a>
+              <a class="catalog__product-info-link" href="/html/card.html?id=premium-lumber-planks" aria-label="Product info link">
+                <span class="catalog__product-title">Premium Lumber Planks</span>
+              </a>
+              <div class="catalog__rating" aria-label="Product rating">
+                <svg class="catalog__rating-star catalog__rating-star--filled" viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#sym-star-full"></use></svg>
+                <svg class="catalog__rating-star catalog__rating-star--filled" viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#sym-star-full"></use></svg>
+                <svg class="catalog__rating-star catalog__rating-star--filled" viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#sym-star-full"></use></svg>
+                <svg class="catalog__rating-star catalog__rating-star--filled" viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#sym-star-full"></use></svg>
+                <svg class="catalog__rating-star catalog__rating-star--filled" viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#sym-star-half"></use></svg>
+                <span class="catalog__rating-value">(4.5)</span>
+              </div>
+              <p class="catalog__product-price">$89.99</p>
+              <p class="catalog__product-paragraph">
+                <span class="catalog__product-category">Wood &amp; Lumber</span>
+              </p>
+              <button class="catalog__product-button" type="button">
+                <svg class="catalog__product-button-icon" width="24" height="24" aria-hidden="true"><use href="../assets/icons.svg#sym-cart"></use></svg>
+                <span class="catalog__product-button-text">Add to Cart</span>
+              </button>
+            </div>
+            <div class="catalog__product-container catalog__product-container--5" aria-label="Container">
+              <a class="catalog__product-link group" href="/html/card.html?id=red-clay-bricks" aria-label="Product">
+                <img
+                  src="https://images.unsplash.com/photo-1761358270922-5a4df4ab9782?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb25zdHJ1Y3Rpb24lMjBicmlja3MlMjByZWQlMjBzdGFja3xlbnwxfHx8fDE3NzExODUyNzJ8MA&amp;ixlib=rb-4.1.0&amp;q=80&amp;w=1080&amp;utm_source=figma&amp;utm_medium=referral"
+                  alt="Red Clay Bricks"
+                  class="catalog__product-image w-full h-full object-cover group-hover:scale-105 transition duration-300"
+                />
+              </a>
+              <a class="catalog__product-info-link" href="/html/card.html?id=red-clay-bricks" aria-label="Product info link">
+                <span class="catalog__product-title">Red Clay Bricks</span>
+              </a>
+              <div class="catalog__rating" aria-label="Product rating">
+                <svg class="catalog__rating-star catalog__rating-star--filled" viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#sym-star-full"></use></svg>
+                <svg class="catalog__rating-star catalog__rating-star--filled" viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#sym-star-full"></use></svg>
+                <svg class="catalog__rating-star catalog__rating-star--filled" viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#sym-star-full"></use></svg>
+                <svg class="catalog__rating-star catalog__rating-star--filled" viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#sym-star-full"></use></svg>
+                <svg class="catalog__rating-star catalog__rating-star--empty" viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#sym-star-empty"></use></svg>
+                <span class="catalog__rating-value">(4.0)</span>
+              </div>
+              <p class="catalog__product-price">$0.89</p>
+              <p class="catalog__product-paragraph">
+                <span class="catalog__product-category">Bricks &amp; Blocks</span>
+              </p>
+              <button class="catalog__product-button" type="button">
+                <svg class="catalog__product-button-icon" width="24" height="24" aria-hidden="true"><use href="../assets/icons.svg#sym-cart"></use></svg>
+                <span class="catalog__product-button-text">Add to Cart</span>
+              </button>
+            </div>
+            <div class="catalog__product-container catalog__product-container--6" aria-label="Container">
+              <a class="catalog__product-link group" href="/html/card.html?id=steel-i-beams" aria-label="Product">
+                <img
+                  src="https://images.unsplash.com/photo-1707236527163-bd3478178466?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxzdGVlbCUyMGJlYW1zJTIwY29uc3RydWN0aW9uJTIwbWV0YWx8ZW58MXx8fHwxNzcxMTg1MjcyfDA&amp;ixlib=rb-4.1.0&amp;q=80&amp;w=1080&amp;utm_source=figma&amp;utm_medium=referral"
+                  alt="Steel I-Beams"
+                  class="catalog__product-image w-full h-full object-cover group-hover:scale-105 transition duration-300"
+                />
+              </a>
+              <a class="catalog__product-info-link" href="/html/card.html?id=steel-i-beams" aria-label="Product info link">
+                <span class="catalog__product-title">Steel I-Beams</span>
+              </a>
+              <div class="catalog__rating" aria-label="Product rating">
+                <svg class="catalog__rating-star catalog__rating-star--filled" viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#sym-star-full"></use></svg>
+                <svg class="catalog__rating-star catalog__rating-star--filled" viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#sym-star-full"></use></svg>
+                <svg class="catalog__rating-star catalog__rating-star--filled" viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#sym-star-full"></use></svg>
+                <svg class="catalog__rating-star catalog__rating-star--filled" viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#sym-star-full"></use></svg>
+                <svg class="catalog__rating-star catalog__rating-star--filled" viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#sym-star-full"></use></svg>
+                <span class="catalog__rating-value">(5.0)</span>
+              </div>
+              <p class="catalog__product-price">$349.99</p>
+              <p class="catalog__product-paragraph">
+                <span class="catalog__product-category">Steel &amp; Metal</span>
+              </p>
+              <button class="catalog__product-button" type="button">
+                <svg class="catalog__product-button-icon" width="24" height="24" aria-hidden="true"><use href="../assets/icons.svg#sym-cart"></use></svg>
+                <span class="catalog__product-button-text">Add to Cart</span>
+              </button>
+            </div>
+          </div>
+        </section>
+      </div>
+      <div id="site-footer-mount"></div>
+    </main>
+    <script src="../scripts/header.js"></script>
+    <script src="../scripts/footer.js"></script>
+    <script src="../scripts/catalog.js"></script>
+  </body>
+</html>

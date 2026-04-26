@@ -13,16 +13,16 @@
         </p>
         <div class="footer__social" aria-label="Social media">
           <a class="footer__social-link" href="#" aria-label="Facebook">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#sym-social-facebook"></use></svg>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#sym-social-facebook"></use></svg>
           </a>
           <a class="footer__social-link" href="#" aria-label="Twitter">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#sym-social-twitter"></use></svg>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#sym-social-twitter"></use></svg>
           </a>
           <a class="footer__social-link" href="#" aria-label="Instagram">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#sym-social-instagram"></use></svg>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#sym-social-instagram"></use></svg>
           </a>
           <a class="footer__social-link" href="#" aria-label="LinkedIn">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#sym-social-linkedin"></use></svg>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#sym-social-linkedin"></use></svg>
           </a>
         </div>
       </div>
@@ -58,7 +58,7 @@
             autocomplete="email"
           />
           <button class="footer__button" type="submit" aria-label="Subscribe">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#sym-mail"></use></svg>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#sym-mail"></use></svg>
           </button>
         </form>
       </div>

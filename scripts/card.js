@@ -1,5 +1,6 @@
-(function () {
+﻿(function () {
   var DEFAULT_ID = "exterior-paint";
+  var ICONS_SPRITE = "../assets/icons.svg#";
 
   function formatPrice(n) {
     return "$" + Number(n).toFixed(2);
@@ -14,9 +15,9 @@
   }
 
   function starUseHref(kind) {
-    if (kind === "card-page__rating-star--full") return "#sym-star-full";
-    if (kind === "card-page__rating-star--half") return "#sym-star-half";
-    return "#sym-star-empty";
+    if (kind === "card-page__rating-star--full") return ICONS_SPRITE + "sym-star-full";
+    if (kind === "card-page__rating-star--half") return ICONS_SPRITE + "sym-star-half";
+    return ICONS_SPRITE + "sym-star-empty";
   }
 
   function buildRatingStars(rating) {
@@ -35,7 +36,6 @@
     return parts.join("");
   }
 
-  /** Компактный ряд звёзд + (рейтинг) для карточек Related */
   function buildRelatedRatingRow(rating) {
     var rNum = Number(rating) || 0;
     var parts = [];
@@ -59,11 +59,11 @@
   function applyProduct(p) {
     if (!p) return;
 
-    document.title = p.title + " — BuildMart";
+    document.title = p.title + " - BuildMart";
 
     var crumbLink = document.querySelector(".card-page__breadcrumb-link");
     if (crumbLink) {
-      crumbLink.setAttribute("href", "catalog.html");
+      crumbLink.setAttribute("href", "/html/catalog.html");
       crumbLink.textContent = "Catalog";
     }
     var crumbCur = document.querySelector(".card-page__breadcrumb-current");
@@ -73,7 +73,7 @@
     var g = p.gallery && p.gallery.length ? p.gallery : [p.image];
     if (main && g[0]) {
       main.src = g[0];
-      main.alt = p.title + " — product photo";
+      main.alt = p.title + " - product photo";
     }
 
     var thumbs = document.querySelectorAll(".card-page__thumb");
@@ -143,7 +143,7 @@
         var q = others[o];
         var a = document.createElement("a");
         a.className = "card-page__related-card";
-        a.href = "card.html?id=" + encodeURIComponent(q.id);
+        a.href = "/html/card.html?id=" + encodeURIComponent(q.id);
         var img = document.createElement("img");
         img.className = "card-page__related-card-img";
         img.src = q.image;
@@ -254,3 +254,4 @@
   initGallery();
   initQty();
 })();
+

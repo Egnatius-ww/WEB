@@ -603,14 +603,10 @@
 }
 
 .catalog__rating-star--filled {
-  fill: #facc15;
-  stroke: #facc15;
   color: #facc15;
 }
 
 .catalog__rating-star--empty {
-  fill: none;
-  stroke: #d1d5db;
   color: #d1d5db;
 }
 

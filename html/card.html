@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <script>
+      (function () {
+        function documentDirectoryHref() {
+          var u = new URL(location.href);
+          u.hash = "";
+          u.search = "";
+          var path = u.pathname;
+          path = path.replace(/\/[^/]+\/?$/, "/");
+          if (!path) path = "/";
+          u.pathname = path;
+          return u.href;
+        }
+        var b = document.createElement("base");
+        b.href = documentDirectoryHref();
+        var meta = document.head.querySelector("meta[charset]");
+        document.head.insertBefore(b, meta ? meta.nextSibling : document.head.firstChild);
+      })();
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BuildMart</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../styles/main.css" />
+    <link rel="stylesheet" href="../styles/header.css" />
+    <link rel="stylesheet" href="../styles/footer.css" />
+    <link rel="stylesheet" href="../styles/card.css" />
+  </head>
+  <body>
+    <main class="screen">
+      <div id="site-header-mount"></div>
+      <div class="screen__content card-page">
+        <div class="card-page__container">
+          <nav class="card-page__breadcrumb" aria-label="Breadcrumb">
+            <a class="card-page__breadcrumb-link" href="/html/catalog.html">Catalog</a>
+            <span class="card-page__breadcrumb-separator" aria-hidden="true">/</span>
+            <span class="card-page__breadcrumb-current">Exterior Paint Set</span>
+          </nav>
+
+          <section class="card-page__product-card" aria-label="Product card">
+            <div class="card-page__left">
+              <div class="card-page__hero">
+                <img
+                  id="card-gallery-main"
+                  class="card-page__hero-img"
+                  src="../images/photo1.jpg"
+                  width="584"
+                  height="584"
+                  alt="Exterior Paint Set — product photo"
+                />
+                <button type="button" class="card-page__nav card-page__nav--prev" id="card-gallery-prev" aria-label="Previous image">
+                  <svg width="20" height="20" aria-hidden="true"><use href="../assets/icons.svg#sym-chevron-left"></use></svg>
+                </button>
+                <button type="button" class="card-page__nav card-page__nav--next" id="card-gallery-next" aria-label="Next image">
+                  <svg width="20" height="20" aria-hidden="true"><use href="../assets/icons.svg#sym-chevron-right"></use></svg>
+                </button>
+              </div>
+              <div class="card-page__thumbnails" role="group" aria-label="Product photos">
+                <button type="button" class="card-page__thumb is-active" data-full-src="../images/photo1.jpg" aria-label="Show photo 1" aria-pressed="true">
+                  <img src="../images/photo1.jpg" alt="" />
+                </button>
+                <button type="button" class="card-page__thumb" data-full-src="../images/photo1.jpg" aria-label="Show photo 2" aria-pressed="false">
+                  <img src="../images/photo1.jpg" alt="" />
+                </button>
+                <button type="button" class="card-page__thumb" data-full-src="../images/photo1.jpg" aria-label="Show photo 3" aria-pressed="false">
+                  <img src="../images/photo1.jpg" alt="" />
+                </button>
+              </div>
+            </div>
+
+            <div class="card-page__right">
+              <h1 class="card-page__title">Exterior Paint Set</h1>
+              <div class="card-page__rating-block">
+                <div class="card-page__rating" aria-label="Rating 3.5 out of 5">
+                  <svg class="card-page__rating-star card-page__rating-star--full" width="24" height="24" aria-hidden="true"><use href="../assets/icons.svg#sym-star-full"></use></svg>
+                  <svg class="card-page__rating-star card-page__rating-star--full" width="24" height="24" aria-hidden="true"><use href="../assets/icons.svg#sym-star-full"></use></svg>
+                  <svg class="card-page__rating-star card-page__rating-star--full" width="24" height="24" aria-hidden="true"><use href="../assets/icons.svg#sym-star-full"></use></svg>
+                  <svg class="card-page__rating-star card-page__rating-star--half" width="24" height="24" aria-hidden="true"><use href="../assets/icons.svg#sym-star-half"></use></svg>
+                  <svg class="card-page__rating-star card-page__rating-star--empty" width="24" height="24" aria-hidden="true"><use href="../assets/icons.svg#sym-star-empty"></use></svg>
+                  <span class="card-page__rating-value">(3.5)</span>
+                </div>
+              </div>
+              <div class="card-page__price">
+                <p class="card-page__price-row">
+                  <span class="card-page__price-amount">$45.99</span>
+                  <span class="card-page__price-unit">/unit</span>
+                </p>
+              </div>
+              <div class="card-page__features">
+                <div class="card-page__feature">
+                  <span class="card-page__feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24"><use href="../assets/icons.svg#sym-package"></use></svg></span>
+                  <div class="card-page__feature-text">
+                    <p class="card-page__feature-title">Quality Assured</p>
+                    <p class="card-page__feature-desc">Premium grade material</p>
+                  </div>
+                </div>
+                <div class="card-page__feature">
+                  <span class="card-page__feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24"><use href="../assets/icons.svg#sym-truck"></use></svg></span>
+                  <div class="card-page__feature-text">
+                    <p class="card-page__feature-title">Fast Delivery</p>
+                    <p class="card-page__feature-desc">2–5 business days</p>
+                  </div>
+                </div>
+                <div class="card-page__feature">
+                  <span class="card-page__feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24"><use href="../assets/icons.svg#sym-shield"></use></svg></span>
+                  <div class="card-page__feature-text">
+                    <p class="card-page__feature-title">Warranty</p>
+                    <p class="card-page__feature-desc">30-day guarantee</p>
+                  </div>
+                </div>
+              </div>
+              <div class="card-page__quantity-block">
+                <label class="card-page__quantity-label" for="card-qty">Quantity</label>
+                <div class="card-page__quantity-controls">
+                  <button type="button" class="card-page__qty-btn" id="card-qty-decrease" aria-label="Decrease quantity">-</button>
+                  <input
+                    id="card-qty"
+                    class="card-page__qty-input"
+                    type="number"
+                    min="1"
+                    step="1"
+                    value="1"
+                    inputmode="numeric"
+                    aria-label="Quantity"
+                  />
+                  <button type="button" class="card-page__qty-btn" id="card-qty-increase" aria-label="Increase quantity">+</button>
+                </div>
+              </div>
+              <div class="card-page__actions">
+                <button type="button" class="card-page__btn card-page__btn--primary">
+                  <svg width="20" height="20" aria-hidden="true"><use href="../assets/icons.svg#sym-cart"></use></svg>
+                  Add to Cart
+                </button>
+                <button type="button" class="card-page__btn card-page__btn--secondary">Buy Now</button>
+              </div>
+              <div class="card-page__description-block">
+                <h2 class="card-page__section-heading">Description</h2>
+                <p class="card-page__section-text">
+                  Professional-grade exterior paint set designed to withstand harsh weather conditions. This premium paint offers excellent coverage, durability, and color retention. Perfect for residential and commercial exterior surfaces.
+                </p>
+              </div>
+              <div class="card-page__accordion-wrap">
+                <details class="card-page__accordion">
+                  <summary class="card-page__accordion-summary">
+                    Technical Specifications
+                    <svg class="card-page__accordion-chevron" width="16" height="16" aria-hidden="true"><use href="../assets/icons.svg#sym-chevron-down"></use></svg>
+                  </summary>
+                  <div class="card-page__accordion-body">
+                    <div class="card-page__spec-panel">
+                      <dl class="card-page__spec-grid">
+                        <div class="card-page__spec-item"><dt class="card-page__spec-label">Volume</dt><dd class="card-page__spec-value">5 gallons total</dd></div>
+                        <div class="card-page__spec-item"><dt class="card-page__spec-label">Type</dt><dd class="card-page__spec-value">100% Acrylic Latex</dd></div>
+                        <div class="card-page__spec-item"><dt class="card-page__spec-label">Coverage</dt><dd class="card-page__spec-value">400 sq ft per gallon</dd></div>
+                        <div class="card-page__spec-item"><dt class="card-page__spec-label">Finish</dt><dd class="card-page__spec-value">Satin</dd></div>
+                        <div class="card-page__spec-item"><dt class="card-page__spec-label">Dry Time</dt><dd class="card-page__spec-value">2-4 hours</dd></div>
+                        <div class="card-page__spec-item"><dt class="card-page__spec-label">Colors</dt><dd class="card-page__spec-value">Assorted neutral tones</dd></div>
+                      </dl>
+                    </div>
+                  </div>
+                </details>
+              </div>
+            </div>
+          </section>
+
+          <section class="card-page__related" aria-labelledby="related-heading">
+            <div class="card-page__related-inner">
+              <h2 id="related-heading" class="card-page__related-title">Related Products</h2>
+              <div class="card-page__related-grid"></div>
+            </div>
+          </section>
+        </div>
+      </div>
+      <div id="site-footer-mount"></div>
+    </main>
+    <script src="../scripts/products.js"></script>
+    <script src="../scripts/header.js"></script>
+    <script src="../scripts/footer.js"></script>
+    <script src="../scripts/card.js"></script>
+  </body>
+</html>
