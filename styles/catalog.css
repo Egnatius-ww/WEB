@@ -167,7 +167,8 @@
 }
 
 .catalog__filters-heading {
-  height: 27px;
+  height: auto;
+  min-height: 27px;
   margin: 0;
   box-sizing: border-box;
 }
@@ -177,7 +178,7 @@
 }
 
 .catalog__filters-heading--price {
-  width: 100px;
+  width: 100%;
   max-width: 100%;
   margin: 0;
 }
@@ -662,6 +663,7 @@
   width: 355.33px;
   height: 36px;
   margin-top: 16px;
+  margin-bottom: 16px;
   margin-left: 16px;
   border: none;
   border-radius: 10px;
@@ -807,7 +809,6 @@
   box-sizing: border-box;
 }
 
-/* —— Responsive: flow layout + product grid (1 / 2 / 3 cols) —— */
 .catalog {
   height: auto !important;
   min-height: 0;
@@ -928,10 +929,18 @@
     gap: 20px;
   }
 
+  .catalog__filters-panel {
+    min-width: 0;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
   .catalog__filters-row {
     flex-direction: column;
     align-items: stretch;
     min-height: 0;
+    min-width: 0;
+    max-width: 100%;
     gap: 20px;
   }
 
@@ -939,10 +948,46 @@
     flex: 1 1 auto;
     width: 100%;
     max-width: 100%;
+    min-width: 0;
+  }
+
+  .catalog__filters-column--rating .catalog__filters-heading {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .catalog__filters-column--price {
+    min-width: 0;
+    max-width: 100%;
+    width: 100%;
+    min-height: 0;
+  }
+
+  .catalog__filters-column {
+    height: auto;
+    min-height: 0;
+  }
+
+  .catalog__filters-column--price .catalog__filters-heading {
+    min-height: 0;
+  }
+
+  .catalog__filters-heading-text {
+    min-width: 0;
+    white-space: normal;
+  }
+
+  .catalog__filters-heading-text--price {
+    min-width: 0;
+    white-space: nowrap;
   }
 
   .catalog__filters-track {
     width: 100%;
+    max-width: 100%;
+  }
+
+  .catalog__price-range-labels {
     max-width: 100%;
   }
 }
@@ -1038,6 +1083,7 @@
   margin-left: 16px;
   margin-right: 16px;
   margin-top: 16px;
+  margin-bottom: 16px;
 }
 
 .catalog__product-button-icon,
