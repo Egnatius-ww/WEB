@@ -63,7 +63,7 @@
 
     var crumbLink = document.querySelector(".card-page__breadcrumb-link");
     if (crumbLink) {
-      crumbLink.setAttribute("href", "/html/catalog.html");
+      crumbLink.setAttribute("href", "catalog.html");
       crumbLink.textContent = "Catalog";
     }
     var crumbCur = document.querySelector(".card-page__breadcrumb-current");
@@ -143,7 +143,7 @@
         var q = others[o];
         var a = document.createElement("a");
         a.className = "card-page__related-card";
-        a.href = "/html/card.html?id=" + encodeURIComponent(q.id);
+        a.href = "card.html?id=" + encodeURIComponent(q.id);
         var img = document.createElement("img");
         img.className = "card-page__related-card-img";
         img.src = q.image;
