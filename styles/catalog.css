@@ -1047,3 +1047,28 @@
   left: auto;
 }
 
+@media (max-width: 425px) {
+  .catalog__filters-panel {
+    padding-right: 0;
+  }
+
+  .catalog__filters-row {
+    padding-right: 0;
+  }
+
+  .catalog__filters-column--price {
+    max-width: 100%;
+    padding-right: 0;
+  }
+
+  .catalog__price-range {
+    padding-right: 0;
+  }
+
+  .catalog__filters-clear-wrap {
+    width: 100%;
+    justify-content: flex-end;
+    padding-right: 0;
+  }
+}
+
