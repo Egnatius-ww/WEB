@@ -4,6 +4,7 @@
   var MAX_VISIBLE = 5;
   var PEEK_PX = 10;
   var SWIPE_THRESHOLD = 44;
+  var PULL_BACK_PX = 5;
 
   function toastInnerHtml() {
     return (
@@ -59,13 +60,18 @@
     }, HIDE_MS);
   }
 
-  function removeItem(item) {
+  function removeItem(item, immediate) {
     if (!item || !item.parentNode) return;
     if (item._buildmartSwipeAc) {
       item._buildmartSwipeAc.abort();
       item._buildmartSwipeAc = null;
     }
     clearAutoHide(item);
+    if (immediate) {
+      if (item.parentNode) item.parentNode.removeChild(item);
+      updateStackOverlap();
+      return;
+    }
     if (item.classList.contains("buildmart-toast-item--out")) return;
     item.classList.remove("buildmart-toast-item--in");
     item.classList.add("buildmart-toast-item--out");
@@ -134,14 +140,33 @@
       var p = point(e);
       var dy = p.clientY - startY;
       var dx = p.clientX - startX;
-      if (Math.abs(dy) > Math.abs(dx) && dy < -4) {
-        inner.style.willChange = "transform, opacity";
-        inner.style.transition = "none";
-        inner.style.transform = "translateY(" + dy + "px)";
-        var o = 1 + dy / 220;
-        inner.style.opacity = o < 0.35 ? "0.35" : String(Math.min(1, o));
-        if (e.cancelable) e.preventDefault();
+      var canDragUp = Math.abs(dy) >= Math.abs(dx) && dy < -4;
+      var canDragRight = Math.abs(dx) > Math.abs(dy) && dx > 4;
+      var pullLeft = 0;
+      var pullDown = 0;
+      if (Math.abs(dx) >= Math.abs(dy)) {
+        pullLeft = dx < 0 ? Math.max(-PULL_BACK_PX, dx) : 0;
+      } else {
+        pullDown = dy > 0 ? Math.min(PULL_BACK_PX, dy) : 0;
       }
+      var hasSoftPull = pullLeft !== 0 || pullDown !== 0;
+      if (!canDragUp && !canDragRight && !hasSoftPull) return;
+
+      inner.style.willChange = "transform, opacity";
+      inner.style.transition = "none";
+      if (canDragUp) {
+        inner.style.transform = "translateY(" + dy + "px)";
+        var oy = 1 + dy / 220;
+        inner.style.opacity = oy < 0.35 ? "0.35" : String(Math.min(1, oy));
+      } else if (canDragRight) {
+        inner.style.transform = "translateX(" + dx + "px)";
+        var ox = 1 - dx / 320;
+        inner.style.opacity = ox < 0.35 ? "0.35" : String(Math.min(1, ox));
+      } else {
+        inner.style.transform = "translate(" + pullLeft + "px, " + pullDown + "px)";
+        inner.style.opacity = "1";
+      }
+      if (e.cancelable) e.preventDefault();
     }
 
     function onEnd(e) {
@@ -149,22 +174,18 @@
       active = false;
       var p = point(e);
       var dy = p.clientY - startY;
+      var dx = p.clientX - startX;
       if (captured && e.pointerId != null && item.releasePointerCapture) {
         try {
           item.releasePointerCapture(e.pointerId);
         } catch (err2) {}
         captured = false;
       }
-      inner.style.opacity = "";
-      if (dy < -SWIPE_THRESHOLD) {
-        inner.style.transition = "";
-        inner.style.transform = "";
-        inner.style.opacity = "";
-        inner.style.removeProperty("will-change");
-        clearAutoHide(item);
-        removeItem(item);
+      if (dy < -SWIPE_THRESHOLD || dx > SWIPE_THRESHOLD) {
+        removeItem(item, true);
         return;
       }
+      inner.style.opacity = "";
       resetInner(true);
     }
 
