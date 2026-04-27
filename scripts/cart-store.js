@@ -1,7 +1,4 @@
-/**
- * Корзина в localStorage: массив { id, qty }.
- * id совпадает с products.js / card.html?id=
- */
+
 (function () {
   var KEY = "buildmartCart";
   var LEGACY = "buildmartCartHasItems";

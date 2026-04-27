@@ -405,6 +405,13 @@
   }
 }
 
+.cart-page__order-summary {
+  position: sticky;
+  top: 100px;
+}
+
+
+
 .cart-page__filled-items {
   box-sizing: border-box;
   display: flex;
