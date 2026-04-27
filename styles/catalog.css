@@ -186,8 +186,10 @@
   position: relative;
   top: 0.5px;
   display: block;
-  width: 135px;
-  height: 27px;
+  width: auto;
+  min-width: max-content;
+  height: auto;
+  white-space: nowrap;
   color: #0a0a0a;
   font-family: Inter, Arial, sans-serif;
   font-size: 18px;
@@ -199,8 +201,8 @@
 }
 
 .catalog__filters-heading-text--price {
-  width: 100px;
-  height: 27px;
+  width: auto;
+  height: auto;
 }
 
 .catalog__filters-track {
