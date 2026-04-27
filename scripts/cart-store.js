@@ -1,4 +1,3 @@
-
 (function () {
   var KEY = "buildmartCart";
   var LEGACY = "buildmartCartHasItems";
