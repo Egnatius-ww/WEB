@@ -1,6 +1,6 @@
 ﻿(function () {
   var DEFAULT_ID = "exterior-paint";
-  var ICONS_SPRITE = "../assets/icons.svg#";
+  var ICONS_DIR = "../assets/icons/";
 
   function formatPrice(n) {
     return "$" + Number(n).toFixed(2);
@@ -15,9 +15,9 @@
   }
 
   function starUseHref(kind) {
-    if (kind === "card-page__rating-star--full") return ICONS_SPRITE + "sym-star-full";
-    if (kind === "card-page__rating-star--half") return ICONS_SPRITE + "sym-star-half";
-    return ICONS_SPRITE + "sym-star-empty";
+    if (kind === "card-page__rating-star--full") return ICONS_DIR + "icon-star-full.svg";
+    if (kind === "card-page__rating-star--half") return ICONS_DIR + "icon-star-half.svg";
+    return ICONS_DIR + "icon-star-empty.svg";
   }
 
   function buildRatingStars(rating) {

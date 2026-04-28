@@ -20,7 +20,6 @@
   box-sizing: border-box;
   display: flex;
   align-items: center;
-  /* <768px — flex + gap; от 768px — grid с равным column-gap в медиазапросе ниже */
   justify-content: flex-start;
   gap: 16px;
   min-width: 0;
@@ -236,7 +235,7 @@
   width: 45px;
 }
 
-/* —— Mobile / tablet / desktop (375px … 1440px+) —— */
+
 .header__toolbar-end {
   display: flex;
   align-items: center;
