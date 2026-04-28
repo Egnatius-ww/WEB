@@ -18,25 +18,25 @@
       <a class="header__navigation-link header__navigation-link--about" href="#">About</a>
     </nav>
     <div class="header__search-field" id="header-search-field">
-      <svg class="header__search-icon" width="24" height="24" aria-hidden="true"><use href="../assets/icons.svg#sym-search"></use></svg>
+      <svg class="header__search-icon" width="24" height="24" aria-hidden="true"><use href="../assets/icons/icon-search.svg"></use></svg>
       <input class="header__search-input" id="header-search-input" type="text" placeholder="Search products..." autocomplete="off" />
     </div>
     <div class="header__toolbar-end">
       <span class="header__search-decoy" aria-hidden="true">
-        <svg class="header__search-decoy-svg" width="24" height="24" aria-hidden="true"><use href="../assets/icons.svg#sym-search"></use></svg>
+        <svg class="header__search-decoy-svg" width="24" height="24" aria-hidden="true"><use href="../assets/icons/icon-search.svg"></use></svg>
       </span>
       <a class="header__action-link" href="cart.html" aria-label="Open cart">
-        <svg class="header__cart-icon w-5 h-5" width="24" height="24" aria-hidden="true"><use href="../assets/icons.svg#sym-cart"></use></svg>
+        <svg class="header__cart-icon w-5 h-5" width="24" height="24" aria-hidden="true"><use href="../assets/icons/icon-cart.svg"></use></svg>
         <span class="header__cart-badge" id="header-cart-badge" hidden aria-hidden="true">0</span>
       </a>
       <button type="button" class="header__icon-btn header__menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="header-mobile-panel">
-        <svg class="header__icon-btn-svg" width="24" height="24" aria-hidden="true"><use href="../assets/icons.svg#sym-menu"></use></svg>
+        <svg class="header__icon-btn-svg" width="24" height="24" aria-hidden="true"><use href="../assets/icons/icon-menu.svg"></use></svg>
       </button>
     </div>
   </div>
   <div id="header-mobile-panel" class="header__mobile-panel" aria-hidden="true">
     <div class="header__search-field header__search-field--panel">
-      <svg class="header__search-icon" width="24" height="24" aria-hidden="true"><use href="../assets/icons.svg#sym-search"></use></svg>
+      <svg class="header__search-icon" width="24" height="24" aria-hidden="true"><use href="../assets/icons/icon-search.svg"></use></svg>
       <input class="header__search-input" id="header-search-input-mobile" type="text" placeholder="Search products..." autocomplete="off" />
     </div>
     <nav class="header__navigation header__navigation--panel" aria-label="Primary navigation">

@@ -21,7 +21,6 @@
     try {
       window.dispatchEvent(new CustomEvent("buildmart-cart-changed"));
     } catch (err) {
-      /* ignore */
     }
   }
 
