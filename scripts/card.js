@@ -1,9 +1,8 @@
-﻿(function () {
-  var DEFAULT_ID = "exterior-paint";
-  var ICONS_DIR = "../assets/icons/";
+(function () {
+  var ICONS_SPRITE = "../assets/icons/";
 
   function formatPrice(n) {
-    return "$" + Number(n).toFixed(2);
+    return "$" + (Math.round(Number(n) * 100) / 100).toFixed(2);
   }
 
   function starClassFor(rating, index1to5) {
@@ -15,9 +14,9 @@
   }
 
   function starUseHref(kind) {
-    if (kind === "card-page__rating-star--full") return ICONS_DIR + "icon-star-full.svg";
-    if (kind === "card-page__rating-star--half") return ICONS_DIR + "icon-star-half.svg";
-    return ICONS_DIR + "icon-star-empty.svg";
+    if (kind === "card-page__rating-star--full") return ICONS_SPRITE + "icon-star-full.svg";
+    if (kind === "card-page__rating-star--half") return ICONS_SPRITE + "icon-star-half.svg";
+    return ICONS_SPRITE + "icon-star-empty.svg";
   }
 
   function buildRatingStars(rating) {
@@ -56,29 +55,54 @@
     return parts.join("");
   }
 
+  function showNotFoundError() {
+    var container = document.querySelector(".card-page__product-card");
+    if (container) {
+      container.innerHTML =
+        '<div style="padding:48px 24px;text-align:center">' +
+        '<h1 style="font-size:28px;margin-bottom:12px">Product not found</h1>' +
+        '<p style="margin-bottom:24px">The product may have been removed from the catalog.</p>' +
+        '<a href="catalog.html" style="color:#111827;font-weight:700">← Back to catalog</a>' +
+        "</div>";
+    }
+    var related = document.querySelector(".card-page__related");
+    if (related) related.hidden = true;
+  }
+
   function applyProduct(p) {
     if (!p) return;
 
     document.title = p.title + " - BuildMart";
 
-    var crumbLink = document.querySelector(".card-page__breadcrumb-link");
-    if (crumbLink) {
-      crumbLink.setAttribute("href", "catalog.html");
-      crumbLink.textContent = "Catalog";
-    }
     var crumbCur = document.querySelector(".card-page__breadcrumb-current");
     if (crumbCur) crumbCur.textContent = p.title;
 
     var main = document.getElementById("card-gallery-main");
-    var g = p.gallery && p.gallery.length ? p.gallery : [p.image];
+    var g = Array.isArray(p.images) && p.images.length ? p.images : [];
     if (main && g[0]) {
       main.src = g[0];
       main.alt = p.title + " - product photo";
     }
 
     var thumbs = document.querySelectorAll(".card-page__thumb");
+    // Если у товара больше 3 фото — добавляем недостающие превью
+    var thumbsWrap = document.querySelector(".card-page__thumbnails");
+    if (thumbsWrap && g.length > thumbs.length) {
+      for (var extra = thumbs.length; extra < g.length; extra++) {
+        var b = document.createElement("button");
+        b.type = "button";
+        b.className = "card-page__thumb";
+        b.setAttribute("aria-label", "Show photo " + (extra + 1));
+        b.setAttribute("aria-pressed", "false");
+        var bi = document.createElement("img");
+        bi.alt = "";
+        b.appendChild(bi);
+        thumbsWrap.appendChild(b);
+      }
+      thumbs = document.querySelectorAll(".card-page__thumb");
+    }
     for (var t = 0; t < thumbs.length; t++) {
-      var url = g[t % g.length];
+      var url = g[t % Math.max(1, g.length)];
       thumbs[t].setAttribute("data-full-src", url);
       thumbs[t].setAttribute("aria-label", "Show photo " + (t + 1));
       var im = thumbs[t].querySelector("img");
@@ -107,11 +131,17 @@
     var descEl = document.querySelector(".card-page__description-block .card-page__section-text");
     if (descEl) descEl.textContent = p.description || "";
 
+    // Характеристики из полей модели (в ТЗ отдельного поля specs нет)
     var specGrid = document.querySelector(".card-page__spec-grid");
-    if (specGrid && p.specs && p.specs.length) {
+    if (specGrid) {
+      var specs = [
+        { label: "Availability", value: p.stock_quantity > 0 ? p.stock_quantity + " in stock" : "Out of stock" },
+        { label: "Product ID", value: "#" + p.id },
+        { label: "Listed", value: new Date(p.created_at).toLocaleDateString("en-US") },
+      ];
       specGrid.textContent = "";
-      for (var i = 0; i < p.specs.length; i++) {
-        var sp = p.specs[i];
+      for (var i = 0; i < specs.length; i++) {
+        var sp = specs[i];
         var row = document.createElement("div");
         row.className = "card-page__spec-item";
         var dt = document.createElement("dt");
@@ -125,82 +155,87 @@
         specGrid.appendChild(row);
       }
     }
+  }
 
+  function renderRelated(products, currentId) {
     var relatedGrid = document.querySelector(".card-page__related-grid");
-    var getRelated = window.getBuildmartProductById;
-    var others = [];
-    if (p.id === "plywood-sheets" && getRelated) {
-      var lumber = getRelated("premium-lumber-planks");
-      if (lumber) others.push(lumber);
-    } else if (p.id === "premium-lumber-planks" && getRelated) {
-      var ply = getRelated("plywood-sheets");
-      if (ply) others.push(ply);
+    var relatedSection = document.querySelector(".card-page__related");
+    if (!relatedGrid) return;
+    var others = (products || []).filter(function (q) {
+      return q.id !== currentId;
+    });
+    if (!others.length) {
+      if (relatedSection) relatedSection.hidden = true;
+      return;
     }
 
-    if (relatedGrid) {
-      relatedGrid.textContent = "";
-      for (var o = 0; o < others.length; o++) {
-        var q = others[o];
-        var a = document.createElement("a");
-        a.className = "card-page__related-card";
-        a.href = "card.html?id=" + encodeURIComponent(q.id);
-        var img = document.createElement("img");
-        img.className = "card-page__related-card-img";
-        img.src = q.image;
-        img.width = 280;
-        img.height = 280;
-        img.alt = "";
-        img.loading = "lazy";
-        var body = document.createElement("div");
-        body.className = "card-page__related-card-body";
-        var h3 = document.createElement("h3");
-        h3.className = "card-page__related-card-title";
-        h3.textContent = q.title;
-        var ratingRow = document.createElement("div");
-        ratingRow.className = "card-page__related-card-rating-row";
-        ratingRow.setAttribute("aria-label", "Rating " + (Number(q.rating) || 0) + " out of 5");
-        ratingRow.innerHTML = buildRelatedRatingRow(q.rating);
-        var pr = document.createElement("p");
-        pr.className = "card-page__related-card-price";
-        pr.textContent = formatPrice(q.price);
-        body.appendChild(h3);
-        body.appendChild(ratingRow);
-        body.appendChild(pr);
-        a.appendChild(img);
-        a.appendChild(body);
-        relatedGrid.appendChild(a);
-      }
-    }
+    relatedGrid.textContent = "";
+    others.slice(0, 4).forEach(function (q) {
+      var a = document.createElement("a");
+      a.className = "card-page__related-card";
+      a.href = "card.html?id=" + encodeURIComponent(q.id);
+      var img = document.createElement("img");
+      img.className = "card-page__related-card-img";
+      img.src = (q.images && q.images[0]) || "";
+      img.width = 280;
+      img.height = 280;
+      img.alt = "";
+      img.loading = "lazy";
+      var body = document.createElement("div");
+      body.className = "card-page__related-card-body";
+      var h3 = document.createElement("h3");
+      h3.className = "card-page__related-card-title";
+      h3.textContent = q.title;
+      var ratingRow = document.createElement("div");
+      ratingRow.className = "card-page__related-card-rating-row";
+      ratingRow.setAttribute("aria-label", "Rating " + (Number(q.rating) || 0) + " out of 5");
+      ratingRow.innerHTML = buildRelatedRatingRow(q.rating);
+      var pr = document.createElement("p");
+      pr.className = "card-page__related-card-price";
+      pr.textContent = formatPrice(q.price);
+      body.appendChild(h3);
+      body.appendChild(ratingRow);
+      body.appendChild(pr);
+      a.appendChild(img);
+      a.appendChild(body);
+      relatedGrid.appendChild(a);
+    });
   }
 
   function initGallery() {
     var main = document.getElementById("card-gallery-main");
-    var thumbs = Array.prototype.slice.call(document.querySelectorAll(".card-page__thumb"));
     var prevBtn = document.getElementById("card-gallery-prev");
     var nextBtn = document.getElementById("card-gallery-next");
-    if (!main || !thumbs.length) return;
+    if (!main) return;
+
+    function thumbs() {
+      return Array.prototype.slice.call(document.querySelectorAll(".card-page__thumb"));
+    }
 
     function getActiveIndex() {
-      for (var i = 0; i < thumbs.length; i++) {
-        if (thumbs[i].classList.contains("is-active")) return i;
+      var list = thumbs();
+      for (var i = 0; i < list.length; i++) {
+        if (list[i].classList.contains("is-active")) return i;
       }
       return 0;
     }
 
     function activateAt(index) {
-      var n = thumbs.length;
+      var list = thumbs();
+      var n = list.length;
+      if (!n) return;
       var i = ((index % n) + n) % n;
-      var btn = thumbs[i];
+      var btn = list[i];
       var src = btn.getAttribute("data-full-src");
       if (src) main.src = src;
-      thumbs.forEach(function (thumb, j) {
+      list.forEach(function (thumb, j) {
         var on = j === i;
         thumb.classList.toggle("is-active", on);
         thumb.setAttribute("aria-pressed", on ? "true" : "false");
       });
     }
 
-    thumbs.forEach(function (btn, j) {
+    thumbs().forEach(function (btn, j) {
       btn.addEventListener("click", function () {
         activateAt(j);
       });
@@ -310,14 +345,16 @@
     });
   }
 
-  function initQty() {
+  function initQty(maxStock) {
     var qtyInput = document.getElementById("card-qty");
     var qtyDec = document.getElementById("card-qty-decrease");
     var qtyInc = document.getElementById("card-qty-increase");
     if (!qtyInput) return;
 
+    var cap = Number(maxStock) > 0 ? Number(maxStock) : 999;
+
     function readQty() {
-      return Math.max(1, parseInt(qtyInput.value, 10) || 1);
+      return Math.min(cap, Math.max(1, parseInt(qtyInput.value, 10) || 1));
     }
 
     qtyInput.addEventListener("change", function () {
@@ -330,41 +367,79 @@
     }
     if (qtyInc) {
       qtyInc.addEventListener("click", function () {
-        qtyInput.value = String(readQty() + 1);
+        qtyInput.value = String(Math.min(cap, readQty() + 1));
       });
     }
   }
 
-  var params = new URLSearchParams(window.location.search);
-  var id = params.get("id") || DEFAULT_ID;
-  var getP = window.getBuildmartProductById;
-  var product = getP ? getP(id) : null;
-  if (!product && window.BUILDMART_PRODUCTS && window.BUILDMART_PRODUCTS.length) {
-    product = window.getBuildmartProductById(DEFAULT_ID) || window.BUILDMART_PRODUCTS[0];
-  }
-
   function initAddToCart(p) {
-    if (!p || !window.BuildmartCart) return;
+    if (!p) return;
     var btn = document.querySelector(".card-page__btn--primary");
     if (!btn) return;
     btn.addEventListener("click", function () {
       var inp = document.getElementById("card-qty");
       var n = Math.max(1, parseInt(inp && inp.value, 10) || 1);
-      window.BuildmartCart.add(p.id, n);
-      if (window.showBuildmartToast && p && p.title) {
-        if (n <= 1) {
-          window.showBuildmartToast("Added " + p.title + " to cart");
-        } else {
-          window.showBuildmartToast("Added " + n + " × " + p.title + " to cart");
-        }
+      var user = window.BuildmartAuth ? window.BuildmartAuth.currentUser() : null;
+
+      var toast = function (msg) {
+        if (window.showBuildmartToast) window.showBuildmartToast(msg);
+      };
+
+      if (user && window.BuildmartApi) {
+        window.BuildmartApi
+          .addCartItem(p.id, n)
+          .then(function () {
+            return window.BuildmartApi.getCart();
+          })
+          .then(function (cartData) {
+            var count = (cartData.items || []).reduce(function (s, i) {
+              return s + (parseInt(i.qty, 10) || 0);
+            }, 0);
+            if (window.BuildmartHeader) window.BuildmartHeader.setServerCartCount(count);
+            toast(n <= 1 ? "Added " + p.title + " to cart" : "Added " + n + " × " + p.title + " to cart");
+          })
+          .catch(function (err) {
+            toast(err.status === 409 ? "Not enough items in stock" : "Failed to add item");
+          });
+        return;
       }
+
+      if (!window.BuildmartCart) return;
+      window.BuildmartCart.add(p.id, n);
+      toast(n <= 1 ? "Added " + p.title + " to cart" : "Added " + n + " × " + p.title + " to cart");
     });
   }
 
-  applyProduct(product);
-  initGallery();
-  initQty();
-  initSpecsAccordion();
-  initAddToCart(product);
-})();
+  // Загрузка товара из API по числовому id (?id=15)
+  var params = new URLSearchParams(window.location.search);
+  var rawId = (params.get("id") || "").trim();
+  var productId = /^\d+$/.test(rawId) ? Number(rawId) : null;
 
+  if (!api_available()) {
+    showNotFoundError();
+  } else if (productId === null) {
+    showNotFoundError();
+  } else {
+    window.BuildmartApi
+      .getProduct(productId)
+      .then(function (product) {
+        applyProduct(product);
+        initGallery();
+        initQty(product.stock_quantity);
+        initSpecsAccordion();
+        initAddToCart(product);
+        return window.BuildmartApi.getProducts({ limit: 8, sort_by: "title", order: "asc" });
+      })
+      .then(function (list) {
+        if (list) renderRelated(list.items, productId);
+      })
+      .catch(function (err) {
+        console.error("Product load failed:", err);
+        showNotFoundError();
+      });
+  }
+
+  function api_available() {
+    return !!window.BuildmartApi;
+  }
+})();
