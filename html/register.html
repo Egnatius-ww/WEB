@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Create account - BuildMart</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../styles/main.css" />
+    <link rel="stylesheet" href="../styles/header.css" />
+    <link rel="stylesheet" href="../styles/footer.css" />
+    <link rel="stylesheet" href="../styles/auth.css" />
+  </head>
+  <body>
+    <main class="screen">
+      <div id="site-header-mount"></div>
+      <div class="screen__content">
+        <section class="auth-page" aria-label="Create account">
+          <div class="auth-page__card">
+            <h1 class="auth-page__title">Create account</h1>
+            <p class="auth-page__subtitle">Join BuildMart to keep your cart across devices</p>
+            <form class="auth-page__form" id="register-form" novalidate>
+              <div class="auth-page__field">
+                <label class="auth-page__label" for="register-email">Email</label>
+                <input class="auth-page__input" id="register-email" name="email" type="email" autocomplete="email" required />
+              </div>
+              <div class="auth-page__field">
+                <label class="auth-page__label" for="register-password">Password (min 8 characters)</label>
+                <input class="auth-page__input" id="register-password" name="password" type="password" autocomplete="new-password" minlength="8" required />
+              </div>
+              <div class="auth-page__field">
+                <label class="auth-page__label" for="register-password2">Repeat password</label>
+                <input class="auth-page__input" id="register-password2" name="password2" type="password" autocomplete="new-password" minlength="8" required />
+              </div>
+              <p class="auth-page__feedback" id="register-feedback" role="status"></p>
+              <button class="auth-page__submit" id="register-submit" type="submit">Create account</button>
+            </form>
+            <p class="auth-page__switch">
+              Already have an account? <a href="login.html">Sign in</a>
+            </p>
+          </div>
+        </section>
+      </div>
+      <div id="site-footer-mount"></div>
+    </main>
+    <script src="../scripts/api.js"></script>
+    <script src="../scripts/auth.js"></script>
+    <script src="../scripts/cart-store.js"></script>
+    <script src="../scripts/header.js"></script>
+    <script src="../scripts/footer.js"></script>
+    <script>
+      (function () {
+        var form = document.getElementById("register-form");
+        var emailInput = document.getElementById("register-email");
+        var passwordInput = document.getElementById("register-password");
+        var password2Input = document.getElementById("register-password2");
+        var feedback = document.getElementById("register-feedback");
+        var submit = document.getElementById("register-submit");
+
+        if (window.BuildmartAuth && window.BuildmartAuth.currentUser()) {
+          window.location.replace("catalog.html");
+          return;
+        }
+
+        function setFeedback(message, ok) {
+          if (!feedback) return;
+          feedback.textContent = message || "";
+          feedback.classList.toggle("auth-page__feedback--ok", ok === true);
+        }
+
+        form.addEventListener("submit", function (e) {
+          e.preventDefault();
+          setFeedback("");
+          if (passwordInput.value !== password2Input.value) {
+            setFeedback("Passwords do not match");
+            return;
+          }
+          submit.disabled = true;
+          window.BuildmartAuth
+            .register(emailInput.value.trim(), passwordInput.value)
+            .then(function () {
+              setFeedback("Account created. Redirecting...", true);
+              window.location.href = "catalog.html";
+            })
+            .catch(function (err) {
+              if (err.details && err.details.length) {
+                setFeedback(err.details.map(function (d) { return d.message; }).join(". "));
+              } else {
+                setFeedback(err.message || "Registration failed");
+              }
+              submit.disabled = false;
+            });
+        });
+      })();
+    </script>
+  </body>
+</html>

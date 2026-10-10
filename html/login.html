@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign in - BuildMart</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../styles/main.css" />
+    <link rel="stylesheet" href="../styles/header.css" />
+    <link rel="stylesheet" href="../styles/footer.css" />
+    <link rel="stylesheet" href="../styles/auth.css" />
+  </head>
+  <body>
+    <main class="screen">
+      <div id="site-header-mount"></div>
+      <div class="screen__content">
+        <section class="auth-page" aria-label="Sign in">
+          <div class="auth-page__card">
+            <h1 class="auth-page__title">Sign in</h1>
+            <p class="auth-page__subtitle">Access your BuildMart account and synced cart</p>
+            <form class="auth-page__form" id="login-form" novalidate>
+              <div class="auth-page__field">
+                <label class="auth-page__label" for="login-email">Email</label>
+                <input class="auth-page__input" id="login-email" name="email" type="email" autocomplete="email" required />
+              </div>
+              <div class="auth-page__field">
+                <label class="auth-page__label" for="login-password">Password</label>
+                <input class="auth-page__input" id="login-password" name="password" type="password" autocomplete="current-password" required />
+              </div>
+              <p class="auth-page__feedback" id="login-feedback" role="status"></p>
+              <button class="auth-page__submit" id="login-submit" type="submit">Sign in</button>
+            </form>
+            <p class="auth-page__switch">
+              No account yet? <a href="register.html">Create one</a>
+            </p>
+            <p class="auth-page__switch">
+              Demo: customer@buildmart.local / customer12345 · admin@buildmart.local / admin12345
+            </p>
+          </div>
+        </section>
+      </div>
+      <div id="site-footer-mount"></div>
+    </main>
+    <script src="../scripts/api.js"></script>
+    <script src="../scripts/auth.js"></script>
+    <script src="../scripts/cart-store.js"></script>
+    <script src="../scripts/header.js"></script>
+    <script src="../scripts/footer.js"></script>
+    <script>
+      (function () {
+        var form = document.getElementById("login-form");
+        var emailInput = document.getElementById("login-email");
+        var passwordInput = document.getElementById("login-password");
+        var feedback = document.getElementById("login-feedback");
+        var submit = document.getElementById("login-submit");
+
+        // Уже вошёл — на каталог
+        if (window.BuildmartAuth && window.BuildmartAuth.currentUser()) {
+          window.location.replace("catalog.html");
+          return;
+        }
+
+        function setFeedback(message, ok) {
+          if (!feedback) return;
+          feedback.textContent = message || "";
+          feedback.classList.toggle("auth-page__feedback--ok", ok === true);
+        }
+
+        form.addEventListener("submit", function (e) {
+          e.preventDefault();
+          setFeedback("");
+          submit.disabled = true;
+          window.BuildmartAuth
+            .login(emailInput.value.trim(), passwordInput.value)
+            .then(function () {
+              setFeedback("Signed in. Redirecting...", true);
+              window.location.href = "catalog.html";
+            })
+            .catch(function (err) {
+              setFeedback(err.message || "Sign in failed");
+              submit.disabled = false;
+            });
+        });
+      })();
+    </script>
+  </body>
+</html>
