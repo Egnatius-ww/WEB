@@ -7,6 +7,8 @@ const ApiError = require('./utils/ApiError');
 const swaggerSpec = require('./docs/swagger');
 const { serve: serveSwaggerUI, setup: setupSwaggerUI } = require('swagger-ui-express');
 
+const authRouter = require('./routes/auth');
+
 const app = express();
 
 app.use(
@@ -19,6 +21,8 @@ app.use(express.json());
 app.get('/api/health', (req, res) => {
   res.json({ status: 'ok', uptime: process.uptime() });
 });
+
+app.use('/api/auth', authRouter);
 
 app.use('/api/docs', serveSwaggerUI, setupSwaggerUI(swaggerSpec));
 

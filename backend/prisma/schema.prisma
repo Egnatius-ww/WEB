@@ -1,0 +1,73 @@
+// BuildMart — схема БД по ТЗ (MySQL 8)
+// User, Product, Cart/CartItem, PromoCode
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  CUSTOMER
+  ADMIN
+}
+
+model User {
+  id           Int       @id @default(autoincrement())
+  email        String    @unique @db.VarChar(255)
+  passwordHash String    @map("password_hash") @db.VarChar(255)
+  role         Role      @default(CUSTOMER)
+  createdAt    DateTime  @default(now()) @map("created_at")
+  cart         Cart?
+
+  @@map("users")
+}
+
+model Product {
+  id            Int        @id @default(autoincrement())
+  title         String     @db.VarChar(255)
+  description   String     @db.Text
+  price         Decimal    @db.Decimal(10, 2)
+  rating        Float
+  images        Json // массив URL (минимум 3 — для слайдера в карточке товара)
+  stockQuantity Int        @map("stock_quantity")
+  createdAt     DateTime   @default(now()) @map("created_at")
+  cartItems     CartItem[]
+
+  @@map("products")
+}
+
+model Cart {
+  id        Int        @id @default(autoincrement())
+  user      User       @relation(fields: [userId], references: [id])
+  userId    Int        @unique @map("user_id")
+  items     CartItem[]
+  updatedAt DateTime   @updatedAt @map("updated_at")
+
+  @@map("carts")
+}
+
+model CartItem {
+  id        Int     @id @default(autoincrement())
+  cart      Cart    @relation(fields: [cartId], references: [id], onDelete: Cascade)
+  cartId    Int     @map("cart_id")
+  product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  productId Int     @map("product_id")
+  qty       Int
+
+  // одна строка на товар в корзине — при повторном добавлении увеличиваем qty
+  @@unique([cartId, productId])
+  @@map("cart_items")
+}
+
+model PromoCode {
+  id                 Int     @id @default(autoincrement())
+  code               String  @unique @db.VarChar(64)
+  discountPercentage Int     @map("discount_percentage")
+  isActive           Boolean @default(true) @map("is_active")
+
+  @@map("promo_codes")
+}
