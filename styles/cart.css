@@ -225,6 +225,7 @@
   }
 }
 
+<<<<<<< Updated upstream
 @media (width: 1024px) {
   .cart-page__filled-layout {
     grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -295,15 +296,17 @@
   }
 }
 
+=======
+>>>>>>> Stashed changes
 @media (min-width: 1024px) and (max-width: 1279px) {
   .cart-page__cart-head {
-    grid-template-columns: minmax(0, 1fr) 90px 110px 90px 36px;
+    grid-template-columns: minmax(260px, 2fr) 90px 120px 90px 36px;
     gap: 12px;
     padding: 14px 16px;
   }
 
   .cart-page__cart-lines .cart-page__item {
-    grid-template-columns: minmax(0, 1fr) 90px 110px 90px 36px;
+    grid-template-columns: minmax(260px, 2fr) 90px 120px 90px 36px;
     gap: 12px;
     padding: 14px 16px;
   }
